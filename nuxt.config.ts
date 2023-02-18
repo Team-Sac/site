@@ -1,11 +1,10 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  vite: {
-    server: {
-      fs: {
-        allow: []
-      }
-    }
+  app: {
+    head: {
+      title: "Team Sac",
+      charset: "utf8"
+    },
   },
   ssr: true,
   modules: [
