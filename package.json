@@ -29,6 +29,6 @@
   },
   "dependencies": {
     "@nuxt/types": "^2.16.0",
-    "nuxt-directus": "^3.2.2"
+    "nuxt-directus": "^5.0.1"
   }
 }
