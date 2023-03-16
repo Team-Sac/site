@@ -2466,6 +2466,7 @@ packages:
       '@vue/shared': 3.2.47
       estree-walker: 2.0.2
       source-map: 0.6.1
+    dev: true
 
   /@vue/compiler-dom/3.2.47:
     resolution:
@@ -2475,6 +2476,7 @@ packages:
     dependencies:
       '@vue/compiler-core': 3.2.47
       '@vue/shared': 3.2.47
+    dev: true
 
   /@vue/compiler-sfc/3.2.47:
     resolution:
@@ -2492,6 +2494,7 @@ packages:
       magic-string: 0.25.9
       postcss: 8.4.21
       source-map: 0.6.1
+    dev: true
 
   /@vue/compiler-ssr/3.2.47:
     resolution:
@@ -2501,12 +2504,14 @@ packages:
     dependencies:
       '@vue/compiler-dom': 3.2.47
       '@vue/shared': 3.2.47
+    dev: true
 
   /@vue/devtools-api/6.5.0:
     resolution:
       {
         integrity: sha512-o9KfBeaBmCKl10usN4crU53fYtC1r7jJwdGKjPT24t348rHxgfpZ0xL3Xm/gLUYnc0oTp8LAmrxOeLyu6tbk2Q==,
       }
+    dev: true
 
   /@vue/reactivity-transform/3.2.47:
     resolution:
@@ -2519,6 +2524,7 @@ packages:
       '@vue/shared': 3.2.47
       estree-walker: 2.0.2
       magic-string: 0.25.9
+    dev: true
 
   /@vue/reactivity/3.2.47:
     resolution:
@@ -2527,6 +2533,7 @@ packages:
       }
     dependencies:
       '@vue/shared': 3.2.47
+    dev: true
 
   /@vue/runtime-core/3.2.47:
     resolution:
@@ -2536,6 +2543,7 @@ packages:
     dependencies:
       '@vue/reactivity': 3.2.47
       '@vue/shared': 3.2.47
+    dev: true
 
   /@vue/runtime-dom/3.2.47:
     resolution:
@@ -2546,6 +2554,7 @@ packages:
       '@vue/runtime-core': 3.2.47
       '@vue/shared': 3.2.47
       csstype: 2.6.21
+    dev: true
 
   /@vue/server-renderer/3.2.47_vue@3.2.47:
     resolution:
@@ -2558,14 +2567,16 @@ packages:
       '@vue/compiler-ssr': 3.2.47
       '@vue/shared': 3.2.47
       vue: 3.2.47
+    dev: true
 
   /@vue/shared/3.2.47:
     resolution:
       {
         integrity: sha512-BHGyyGN3Q97EZx0taMQ+OLNuZcW3d37ZEVmEAyeoA9ERdGvm9Irc/0Fua8SNyOtV1w6BS4q25wbMzJujO9HIfQ==,
       }
+    dev: true
 
-  /@vueuse/core/9.13.0_vue@3.2.47:
+  /@vueuse/core/9.13.0:
     resolution:
       {
         integrity: sha512-pujnclbeHWxxPRqXWmdkKV5OX4Wk4YeK7wusHqRwU0Q7EFusHoqNA/aPhB6KCh9hEqJkLAJo7bb0Lh9b+OIVzw==,
@@ -2573,8 +2584,8 @@ packages:
     dependencies:
       '@types/web-bluetooth': 0.0.16
       '@vueuse/metadata': 9.13.0
-      '@vueuse/shared': 9.13.0_vue@3.2.47
-      vue-demi: 0.13.11_vue@3.2.47
+      '@vueuse/shared': 9.13.0
+      vue-demi: 0.13.11
     transitivePeerDependencies:
       - '@vue/composition-api'
       - vue
@@ -2608,13 +2619,13 @@ packages:
       - vue
     dev: true
 
-  /@vueuse/shared/9.13.0_vue@3.2.47:
+  /@vueuse/shared/9.13.0:
     resolution:
       {
         integrity: sha512-UrnhU+Cnufu4S6JLCPZnkWh0WwZGUp72ktOF2DFptMlOs3TOdVv8xJN53zhHGARmVOsz5KqOls09+J1NR6sBKw==,
       }
     dependencies:
-      vue-demi: 0.13.11_vue@3.2.47
+      vue-demi: 0.13.11
     transitivePeerDependencies:
       - '@vue/composition-api'
       - vue
@@ -4498,6 +4509,7 @@ packages:
       {
         integrity: sha512-Z1PhmomIfypOpoMjRQB70jfvy/wxT50qW08YXO5lMIJkrdq4yOTR+AW7FqutScmB9NkLwxo+jU+kZLbofZZq/w==,
       }
+    dev: true
 
   /cuint/0.2.2:
     resolution:
@@ -8085,6 +8097,7 @@ packages:
       }
     dependencies:
       sourcemap-codec: 1.4.8
+    dev: true
 
   /magic-string/0.27.0:
     resolution:
@@ -8516,6 +8529,7 @@ packages:
       }
     engines: { node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1 }
     hasBin: true
+    dev: true
 
   /nanoid/4.0.1:
     resolution:
@@ -11066,6 +11080,7 @@ packages:
         integrity: sha512-R0XvVJ9WusLiqTCEiGCmICCMplcCkIwwR11mOSD9CR5u+IXYdiseeEuXCVAjS54zqwkLcPNnmU4OeJ6tUrWhDw==,
       }
     engines: { node: '>=0.10.0' }
+    dev: true
 
   /source-map-resolve/0.5.3:
     resolution:
@@ -11126,6 +11141,7 @@ packages:
         integrity: sha512-9NykojV5Uih4lgo5So5dtw+f0JgJX30KCNI8gwhz2J9A15wD0Ml6tjHKwf6fTSa6fAdVBdZeNOs9eJ71qCk8vA==,
       }
     deprecated: Please use @jridgewell/sourcemap-codec instead
+    dev: true
 
   /spdx-correct/3.2.0:
     resolution:
@@ -12486,7 +12502,7 @@ packages:
       ufo: 1.1.1
     dev: true
 
-  /vue-demi/0.13.11_vue@3.2.47:
+  /vue-demi/0.13.11:
     resolution:
       {
         integrity: sha512-IR8HoEEGM65YY3ZJYAjMlKygDQn25D5ajNFNoKh9RSDMQtlzCxtfQjdQgv9jjK+m3377SsJXY8ysq8kLCZL25A==,
@@ -12554,6 +12570,7 @@ packages:
       '@vue/runtime-dom': 3.2.47
       '@vue/server-renderer': 3.2.47_vue@3.2.47
       '@vue/shared': 3.2.47
+    dev: true
 
   /watchpack-chokidar2/2.0.1:
     resolution:
