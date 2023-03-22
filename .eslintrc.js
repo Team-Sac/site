@@ -14,15 +14,24 @@ module.exports = {
     'plugin:prettier/recommended',
     'prettier',
     'eslint-config-airbnb-base',
+    'plugin:storybook/recommended',
   ],
   overrides: [],
   plugins: ['vue'],
   rules: {
-    'prettier/prettier': ['error', { singleQuote: true }],
+    'prettier/prettier': [
+      'error',
+      {
+        singleQuote: true,
+      },
+    ],
     quotes: [
       'error',
       'single',
-      { avoidEscape: true, allowTemplateLiterals: true },
+      {
+        avoidEscape: true,
+        allowTemplateLiterals: true,
+      },
     ],
     'no-undef': 'off',
     'import/no-unresolved': 'off',

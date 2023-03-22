@@ -1,10 +1,10 @@
 <template>
   <div>
-    <Header></Header>
+    <header-base></header-base>
     <slot></slot>
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script lang="ts" setup></script>
 
 <style scoped></style>
