@@ -30,6 +30,8 @@ onMounted(async () => {
       })
     ).json();
 
+    if (data === undefined) return;
+
     setToken(data.access_token);
   } catch (e) {
     // eslint-disable-next-line no-console
