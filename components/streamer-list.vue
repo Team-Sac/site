@@ -8,9 +8,11 @@ interface Streamer {
   online: boolean;
 }
 
+const token = useDirectusToken();
+const user = useDirectusUser();
+
 const fetchStreamers = async () => {
   try {
-    // var filters = { content: "testcontent", title: "Test1" };
     return await getItems<Streamer>({
       collection: 'streamers',
     });
@@ -21,5 +23,8 @@ const streamers = await fetchStreamers();
 </script>
 <template>
   <p>Liste Streamers</p>
+  <div v-for="streamer in streamers">
+    {{ streamer.id }} - {{ streamer.online ? 'En ligne' : 'Hors ligne' }}
+  </div>
 </template>
 <style scoped></style>
