@@ -13,8 +13,18 @@ export default defineNuxtConfig({
     },
   },
   ssr: true,
-  modules: ['nuxt-directus', '@vueuse/nuxt', '@nuxtjs/tailwindcss'],
+  modules: [
+    'nuxt-directus',
+    '@vueuse/nuxt',
+    '@nuxtjs/tailwindcss',
+    '@pinia/nuxt',
+  ],
   directus: {
     url: 'https://directus.teamsac.xyz/',
+  },
+  runtimeConfig: {
+    twitchClientId: process.env.NUXT_TWITCH_CLIENT_ID || 'twitch_client_id',
+    twitchClientSecret:
+      process.env.NUXT_TWITCH_CLIENT_SECRET || 'twitch_client_secret',
   },
 });
