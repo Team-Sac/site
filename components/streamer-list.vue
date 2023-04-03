@@ -5,17 +5,12 @@ streamerStore.getStreamers(); */
 
 /* const { getItems } = useDirectusItems();
 
-interface Streamer {
-  id: string;
-  sac: boolean;
-  online: boolean;
-} */
+ */
 
 // const token = useDirectusToken();
 // const user = useDirectusUser();
 
-/*
-const fetchStreamers = async () => {
+/* const fetchStreamers = async () => {
   try {
     return await getItems<Streamer>({
       collection: 'streamers',
@@ -23,8 +18,7 @@ const fetchStreamers = async () => {
   } catch (e) {
     throw new Error(e);
   }
-};
-*/
+}; */
 
 // const streamers = await fetchStreamers();
 
