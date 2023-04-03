@@ -2,9 +2,14 @@ import { defineStore } from 'pinia';
 // eslint-disable-next-line import/extensions
 import { useUserStore } from '@/stores/userStore';
 
-// eslint-disable-next-line import/prefer-default-export
+export interface Streamer {
+  id: string;
+  sac: boolean;
+  online: boolean;
+}
+
 export const useStreamersStore = defineStore('streamers', () => {
-  const bearer = ref({});
+  const streamers = ref<Streamer[]>([]);
 
   async function getStreamers() {
     const { getToken } = useUserStore();
@@ -14,5 +19,5 @@ export const useStreamersStore = defineStore('streamers', () => {
     console.log(token.value);
   }
 
-  return { bearer, getStreamers };
+  return { streamers, getStreamers };
 });
