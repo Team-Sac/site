@@ -3,11 +3,6 @@
 
 streamerStore.getStreamers(); */
 
-import { useUserStore } from '@/stores/userStore.ts';
-
-const { getToken } = useUserStore();
-console.log(await getToken());
-
 /* const { getItems } = useDirectusItems();
 
 interface Streamer {
@@ -34,6 +29,13 @@ const fetchStreamers = async () => {
 // const streamers = await fetchStreamers();
 
 // console.log(await streamerStore.getStreamers());
+
+// eslint-disable-next-line import/extensions
+import { useStreamersStore } from '@/stores/streamersStore';
+
+const streamersStore = useStreamersStore();
+
+streamersStore.getStreamers();
 </script>
 <template>
   <p>Liste Streamers</p>
