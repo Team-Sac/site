@@ -1,31 +1,39 @@
 <script lang="ts" setup>
-import { useStreamersStore } from '@/stores/StreamersStore.ts';
+/* const streamerStore = useStreamersStore();
 
-const streamerStore = useStreamersStore();
+streamerStore.getStreamers(); */
 
-const { getItems } = useDirectusItems();
-const router = useRouter();
+import { useUserStore } from '@/stores/userStore.ts';
+
+const { getToken } = useUserStore();
+console.log(await getToken());
+
+/* const { getItems } = useDirectusItems();
 
 interface Streamer {
   id: string;
   sac: boolean;
   online: boolean;
-}
+} */
 
-const token = useDirectusToken();
-const user = useDirectusUser();
+// const token = useDirectusToken();
+// const user = useDirectusUser();
 
+/*
 const fetchStreamers = async () => {
   try {
     return await getItems<Streamer>({
       collection: 'streamers',
     });
-  } catch (e) {}
+  } catch (e) {
+    throw new Error(e);
+  }
 };
+*/
 
-const streamers = await fetchStreamers();
+// const streamers = await fetchStreamers();
 
-console.log(await streamerStore.getStreamers());
+// console.log(await streamerStore.getStreamers());
 </script>
 <template>
   <p>Liste Streamers</p>

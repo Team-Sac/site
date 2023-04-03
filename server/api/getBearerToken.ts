@@ -10,6 +10,5 @@ export default defineEventHandler(async () => {
   };
 
   const data = await fetch('https://id.twitch.tv/oauth2/token', options);
-
   return data.json();
 });

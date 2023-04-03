@@ -1,12 +1,14 @@
 import { defineStore } from 'pinia';
 
+// eslint-disable-next-line import/prefer-default-export
 export const useStreamersStore = defineStore('streamers', () => {
-  const bearer = ref(null);
+  const bearer = ref({});
+
   async function getStreamers() {
-    await useAsyncData('getBearer', () => $fetch('/api/getBearerToken')).then(
+    /* await useAsyncData('getBearer', () => $fetch('/api/getBearerToken')).then(
       (res) => {
         bearer.value = res.data.value.access_token;
-      },
+      }
     );
     console.log(bearer.value);
 
@@ -18,7 +20,16 @@ export const useStreamersStore = defineStore('streamers', () => {
     });
     console.log(streamers);
     return streamers;
+  } */
+    // TODO: Move it to a userStore
+    // const test = console.log(test.data.value);
+    /* return useFetch('/api/getStreamers', {
+      method: 'POST',
+      body: {
+        bearerToken: bearer.value,
+      },
+    }); */
   }
 
-  return { getStreamers };
+  return { bearer, getStreamers };
 });
