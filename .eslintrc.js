@@ -36,6 +36,7 @@ module.exports = {
     'no-undef': 'off',
     'import/no-unresolved': 'off',
     'import/no-extraneous-dependencies': 'off',
+    'vue/no-multiple-template-root': 'off',
   },
   settings: {
     'import/resolver': {
