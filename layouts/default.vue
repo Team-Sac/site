@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="layout">
     <header-base></header-base>
     <slot></slot>
   </div>
@@ -7,4 +7,8 @@
 
 <script lang="ts" setup></script>
 
-<style scoped></style>
+<style scoped>
+div#layout {
+  @apply h-full w-full;
+}
+</style>

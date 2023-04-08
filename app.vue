@@ -39,3 +39,9 @@ onMounted(async () => {
   }
 });
 </script>
+
+<style scoped>
+NuxtPage {
+  @apply h-screen w-screen;
+}
+</style>
