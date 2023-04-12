@@ -19,10 +19,13 @@ module.exports = {
   overrides: [],
   plugins: ['vue'],
   rules: {
+    'comma-dangle': ['error', 'always-multiline'],
     'prettier/prettier': [
       'error',
       {
         singleQuote: true,
+        endOfLine: 'auto',
+        trailingComma: 'all',
       },
     ],
     quotes: [
@@ -37,6 +40,16 @@ module.exports = {
     'import/no-unresolved': 'off',
     'import/no-extraneous-dependencies': 'off',
     'vue/no-multiple-template-root': 'off',
+    'import/extensions': [
+      'error',
+      'ignorePackages',
+      {
+        js: 'never',
+        jsx: 'never',
+        ts: 'never',
+        tsx: 'never',
+      },
+    ],
   },
   settings: {
     'import/resolver': {
