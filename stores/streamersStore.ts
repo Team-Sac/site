@@ -9,15 +9,37 @@ export interface Streamer {
 }
 
 export const useStreamersStore = defineStore('streamers', () => {
-  const streamers = ref<Streamer[]>([]);
+  const { getItems } = useDirectusItems();
+  const fetchDirectusStreamers = async (): Promise<Streamer[]> => {
+    try {
+      return getItems<Streamer[]>({
+        collection: 'streamers',
+      });
+    } catch (e) {
+      throw new Error((e as Error).message);
+    }
+  };
 
   async function getStreamers() {
+    const directusStreamers = await fetchDirectusStreamers();
+    const streamersNames = directusStreamers.map((streamer) => streamer.id);
     const { getToken } = useUserStore();
 
     const token = await getToken();
 
     console.log(token.value);
+
+    const res = await useFetch('/api/getTwitchStreamers', {
+      method: 'POST',
+      body: {
+        bearer: token.value,
+        streamersNames,
+      },
+    });
+    const { data } = res;
+    console.log(data);
+    return data;
   }
 
-  return { streamers, getStreamers };
+  return { getStreamers };
 });
