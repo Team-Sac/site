@@ -14,6 +14,7 @@
   "devDependencies": {
     "@nuxtjs/eslint-config-typescript": "^12.0.0",
     "@nuxtjs/tailwindcss": "^6.6.4",
+    "@types/uuid": "^9.0.1",
     "@typescript-eslint/eslint-plugin": "^5.56.0",
     "@typescript-eslint/parser": "^5.56.0",
     "@vueuse/core": "^9.13.0",
@@ -35,6 +36,9 @@
   },
   "dependencies": {
     "@nuxt/types": "^2.16.3",
-    "nuxt-directus": "^5.1.1"
+    "pinia": "^2.0.34",
+    "@pinia/nuxt": "^0.4.8",
+    "nuxt-directus": "^5.1.1",
+    "uuid": "^9.0.0"
   }
 }

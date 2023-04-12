@@ -1,12 +1,10 @@
 <template>
   <p>Dingue une première page</p>
   <div>
-    <TwitchStream streamer="deuxlames"></TwitchStream>
+    <MultiTwitchStreams></MultiTwitchStreams>
   </div>
 </template>
 
-<script lang="ts" setup>
-import TwitchStream from '~/twitch-stream.vue';
-</script>
+<script lang="ts" setup></script>
 
 <style scoped></style>

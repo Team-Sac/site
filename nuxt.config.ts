@@ -13,7 +13,12 @@ export default defineNuxtConfig({
     },
   },
   ssr: true,
-  modules: ['nuxt-directus', '@vueuse/nuxt', '@nuxtjs/tailwindcss'],
+  modules: [
+    'nuxt-directus',
+    '@vueuse/nuxt',
+    '@nuxtjs/tailwindcss',
+    '@pinia/nuxt',
+  ],
   directus: {
     url: 'https://directus.teamsac.xyz/',
   },
