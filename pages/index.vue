@@ -2,7 +2,7 @@
   <p>Dingue une première page</p>
   <div id="twitch-streams">
     <MultiTwitchStreams></MultiTwitchStreams>
-    <TwitchChat streamer="twitchdev"></TwitchChat>
+    <MultiTwitchChats></MultiTwitchChats>
   </div>
 </template>
 
