@@ -9,6 +9,6 @@
 
 <style scoped>
 div#layout {
-  @apply h-full w-full;
+  @apply h-screen w-screen grid grid-rows-[1fr,1fr,25fr];
 }
 </style>
