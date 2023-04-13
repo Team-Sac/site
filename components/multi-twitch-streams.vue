@@ -16,6 +16,6 @@ const { streams } = useStreamsStore();
 
 <style scoped>
 div {
-  @apply grid grid-cols-[repeat(auto-fit,minmax(33rem,1fr))];
+  @apply grid grid-cols-[repeat(auto-fit,minmax(33rem,1fr))] items-center;
 }
 </style>
