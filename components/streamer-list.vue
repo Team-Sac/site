@@ -37,7 +37,6 @@ const streamers = ref();
 onMounted(async () => {
   const res = await streamersStore.getStreamers();
   streamers.value = streamersStore.streamers;
-  console.log(streamers.value);
 });
 </script>
 <template>
