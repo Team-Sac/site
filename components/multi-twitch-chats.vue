@@ -1,15 +1,16 @@
 <template>
-  <div id="multi-twitch-chats">
-    <div id="tabs-multi-twitch-chats">
+  <div id="multi-twitch-chats" :class="streams.length > 1 && 'multi-chats'">
+    <div v-if="streams.length > 1" id="tabs-multi-twitch-chats">
       <button
         v-for="(stream, key) in streams"
         :key="stream"
+        class="tabs-chat"
         @click="selected = key"
       >
         {{ stream }}
       </button>
     </div>
-    <div>
+    <div class="h-full">
       <TwitchChat
         v-for="(stream, key) in streams"
         :key="stream"
@@ -30,10 +31,18 @@ const selected = ref<number>(0);
 
 <style scoped>
 #multi-twitch-chats {
-  @apply h-full grid grid-rows-[1fr,19fr];
+  @apply h-full;
+}
+
+.multi-chats {
+  @apply grid grid-rows-[1fr,19fr];
 }
 
 #tabs-multi-twitch-chats {
-  @apply flex justify-around;
+  @apply flex justify-around flex-nowrap overflow-x-auto overflow-y-hidden w-full;
+}
+
+.tabs-chat {
+  @apply m-2 w-1/3;
 }
 </style>
