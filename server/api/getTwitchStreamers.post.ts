@@ -1,13 +1,18 @@
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
+  const config = useRuntimeConfig();
   const options = {
-    method: 'POST',
     headers: {
       Authorization: `Bearer ${body.bearer}`,
+      'Client-Id': config.twitchClientId,
     },
   };
-
-  const data = await fetch(`https://api.twitch.tv/helix/users`, options);
+  const streamers = body.streamersNames.join('&login=');
+  // console.log(streamers);
+  const data = await fetch(
+    `https://api.twitch.tv/helix/users?login=${streamers}`,
+    options,
+  );
   console.log(data);
   return data.json();
 });
