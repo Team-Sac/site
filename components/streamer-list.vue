@@ -10,6 +10,7 @@ onMounted(async () => {
   streamers.value = streamersStore.streamers;
 });
 </script>
+
 <template>
   <p>Liste Streamers</p>
   <div class="streamerlist-wrapper">
