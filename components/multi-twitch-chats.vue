@@ -35,14 +35,14 @@ const selected = ref<number>(0);
 }
 
 .multi-chats {
-  @apply grid grid-rows-[1fr,19fr];
+  @apply grid grid-rows-[0,1fr];
 }
 
 #tabs-multi-twitch-chats {
-  @apply flex justify-around flex-nowrap overflow-x-auto overflow-y-hidden w-full;
+  @apply inline whitespace-nowrap overflow-x-auto bg-white;
 }
 
 .tabs-chat {
-  @apply m-2 w-1/3;
+  @apply m-2 w-1/3 text-ellipsis overflow-hidden whitespace-nowrap;
 }
 </style>

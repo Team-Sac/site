@@ -10,6 +10,6 @@
 
 <style scoped>
 #twitch-streams {
-  @apply h-full grid grid-cols-[2fr,minmax(300px,1fr)];
+  @apply w-full h-full grid grid-cols-[3fr,minmax(0,1fr)] justify-self-center;
 }
 </style>

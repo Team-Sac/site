@@ -37,8 +37,4 @@ onBeforeMount(async () => {
 });
 </script>
 
-<style scoped>
-div {
-  @apply w-full aspect-video;
-}
-</style>
+<style scoped></style>
