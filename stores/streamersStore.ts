@@ -38,6 +38,13 @@ export const useStreamersStore = defineStore('streamers', () => {
     });
     const { data } = await res;
     streamers.value = data.value.data;
+    streamers.value.forEach((streamer, index) => {
+      directusStreamers.forEach((dStreamer) => {
+        if (dStreamer.id === streamer.display_name) {
+          streamers.value[index].online = dStreamer.online;
+        }
+      });
+    });
     return data;
   }
 
