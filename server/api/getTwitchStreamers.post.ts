@@ -13,6 +13,5 @@ export default defineEventHandler(async (event) => {
     `https://api.twitch.tv/helix/users?login=${streamers}`,
     options,
   );
-  console.log(data);
   return data.json();
 });
