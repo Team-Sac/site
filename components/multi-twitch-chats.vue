@@ -35,7 +35,7 @@ const selected = ref<number>(0);
 }
 
 .multi-chats {
-  @apply grid grid-rows-[0,1fr];
+  @apply grid grid-rows-[60px,1fr];
 }
 
 #tabs-multi-twitch-chats {
