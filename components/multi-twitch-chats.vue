@@ -72,7 +72,7 @@ const maximize = () => {
 }
 
 .multi-chats {
-  @apply grid grid-rows-[40px,1fr];
+  @apply grid grid-rows-[60px,1fr];
 }
 
 .multi-twitch-chats {
