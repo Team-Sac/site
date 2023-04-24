@@ -1,22 +1,40 @@
 <template>
-  <div id="multi-twitch-chats" :class="streams.length > 1 && 'multi-chats'">
-    <div v-if="streams.length > 1" id="tabs-multi-twitch-chats">
-      <button
-        v-for="(stream, key) in streams"
-        :key="stream"
-        class="tabs-chat"
-        @click="selected = key"
-      >
-        {{ stream }}
+  <div class="multi-twitch-chats">
+    <div id="buttons-twitch-chat" :class="minimize ? 'close' : 'open'">
+      <button @click="opening()">
+        <i :class="close ? 'fa-comments' : 'fa-times'" class="fas"></i>
+      </button>
+      <button :hidden="close" @click="maximize()">
+        <i
+          :class="minimize ? 'fa-window-maximize' : 'fa-window-minimize'"
+          class="fas"
+        ></i>
       </button>
     </div>
-    <div class="h-full">
-      <TwitchChat
-        v-for="(stream, key) in streams"
-        :key="stream"
-        :hidden="key !== selected"
-        :streamer="stream"
-      ></TwitchChat>
+    <div
+      v-if="!close"
+      id="multi-twitch-chats"
+      :class="!minimize && streams.length > 1 && 'multi-chats'"
+      :hidden="minimize"
+    >
+      <div v-if="streams.length > 1" id="tabs-multi-twitch-chats">
+        <button
+          v-for="(stream, key) in streams"
+          :key="stream"
+          class="tabs-chat"
+          @click="selected = key"
+        >
+          {{ stream }}
+        </button>
+      </div>
+      <div class="h-full">
+        <TwitchChat
+          v-for="(stream, key) in streams"
+          :key="stream"
+          :hidden="key !== selected"
+          :streamer="stream"
+        ></TwitchChat>
+      </div>
     </div>
   </div>
 </template>
@@ -24,9 +42,24 @@
 <script lang="ts" setup>
 import { useStreamsStore } from '~/stores/streamsStore';
 
+const emit = defineEmits(['changeSize']);
+
 const { streams } = useStreamsStore();
 
 const selected = ref<number>(0);
+
+const close = ref(false);
+const minimize = ref(false);
+
+const opening = () => {
+  close.value = !close.value;
+  minimize.value = close.value;
+  emit('changeSize', { type: 'closed', isMinimized: close.value });
+};
+const maximize = () => {
+  minimize.value = !minimize.value;
+  emit('changeSize', { type: 'minimized', isMinimized: minimize.value });
+};
 </script>
 
 <style scoped>
@@ -34,8 +67,28 @@ const selected = ref<number>(0);
   @apply h-full;
 }
 
+#buttons-twitch-chat {
+  @apply flex justify-start items-center;
+}
+
 .multi-chats {
-  @apply grid grid-rows-[60px,1fr];
+  @apply grid grid-rows-[40px,1fr];
+}
+
+.multi-twitch-chats {
+  @apply grid grid-rows-[30px,1fr];
+}
+
+.open {
+  @apply w-1/5;
+}
+
+.open > button {
+  @apply w-1/2;
+}
+
+.close > button {
+  @apply w-full;
 }
 
 #tabs-multi-twitch-chats {
