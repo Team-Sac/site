@@ -38,12 +38,13 @@ export const useStreamersStore = defineStore('streamers', () => {
     });
     const { data } = await res;
     streamers.value = data.value.data;
-    streamers.value.forEach((streamer, index) => {
-      directusStreamers.forEach((dStreamer) => {
-        if (dStreamer.id === streamer.display_name) {
-          streamers.value[index].online = dStreamer.online;
-        }
-      });
+    directusStreamers.forEach((dStreamer) => {
+      // Get id of streamer in streamers array
+      const streamerId = streamers.value.findIndex(
+        (streamer) => streamer.display_name === dStreamer.id
+      );
+      // Update this streamer online status
+      streamers.value[streamerId].online = dStreamer.online;
     });
     return data;
   }
