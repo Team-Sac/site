@@ -4,6 +4,7 @@
     id="twitch-streams"
     :class="minimize.minimize ? minimize.type : 'maximize'"
   >
+    <StreamerList></StreamerList>
     <MultiTwitchStreams></MultiTwitchStreams>
     <MultiTwitchChats @change-size="changeSize"></MultiTwitchChats>
   </div>
