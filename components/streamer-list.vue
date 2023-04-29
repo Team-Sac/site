@@ -1,20 +1,22 @@
 <script lang="ts" setup>
-/* const streamerStore = useStreamersStore();
+import { useStreamersStore } from '@/stores/streamersStore';
 
-streamerStore.getStreamers(); */
+const streamerStore = useStreamersStore();
 
-/* const { getItems } = useDirectusItems();
+streamerStore.getStreamers();
+
+const { getItems } = useDirectusItems();
 
 interface Streamer {
   id?: string | number;
   sac: boolean;
   online: boolean;
-} */
+}
 
-// const token = useDirectusToken();
-// const user = useDirectusUser();
+const token = useDirectusToken();
+const user = useDirectusUser();
 
-/* const fetchStreamers = async () => {
+const fetchStreamers = async () => {
   try {
     return await getItems<Streamer>({
       collection: 'streamers',
@@ -22,13 +24,7 @@ interface Streamer {
   } catch (e) {
     throw new Error(e);
   }
-}; */
-
-// const streamers = await fetchStreamers();
-
-// console.log(await streamerStore.getStreamers());
-
-import { useStreamersStore } from '@/stores/streamersStore';
+};
 
 const streamersStore = useStreamersStore();
 
