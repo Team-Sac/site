@@ -10,6 +10,7 @@ specifiers:
   '@typescript-eslint/parser': ^5.56.0
   '@vueuse/core': ^10.1.0
   '@vueuse/nuxt': ^10.1.0
+  crypto-js: ^4.1.1
   eslint: ^8.36.0
   eslint-config-airbnb-base: ^15.0.0
   eslint-config-prettier: ^8.8.0
@@ -31,13 +32,13 @@ specifiers:
 dependencies:
   '@nuxt/types': 2.16.3
   '@pinia/nuxt': 0.4.8_p4srtwdgezcoeovfcc2yxzvaue
-  nuxt-directus: 5.1.1
+  crypto-js: 4.1.1
   pinia: 2.0.34_p4srtwdgezcoeovfcc2yxzvaue
   uuid: 9.0.0
 
 devDependencies:
   '@nuxtjs/eslint-config-typescript': 12.0.0_j4766f7ecgqbon3u7zlxn5zszu
-  '@nuxtjs/tailwindcss': 6.6.4_webpack@4.46.0
+  '@nuxtjs/tailwindcss': 6.6.4_webpack@5.81.0
   '@types/uuid': 9.0.1
   '@typescript-eslint/eslint-plugin': 5.56.0_2hcjazgfnbtq42tcc73br2vup4
   '@typescript-eslint/parser': 5.56.0_j4766f7ecgqbon3u7zlxn5zszu
@@ -54,6 +55,7 @@ devDependencies:
   eslint-plugin-storybook: 0.6.11_j4766f7ecgqbon3u7zlxn5zszu
   eslint-plugin-vue: 9.9.0_eslint@8.36.0
   nuxt: 3.3.1_j4766f7ecgqbon3u7zlxn5zszu
+  nuxt-directus: 5.1.1
   prettier: 2.8.6
   typescript: 5.0.2
   vite: 4.2.1
@@ -1049,7 +1051,7 @@ packages:
       - supports-color
     dev: true
 
-  /@nuxt/postcss8/1.1.3_webpack@4.46.0:
+  /@nuxt/postcss8/1.1.3_webpack@5.81.0:
     resolution: {integrity: sha512-CdHtErhvQwueNZPBOmlAAKrNCK7aIpZDYhtS7TzXlSgPHHox1g3cSlf+Ke9oB/8t4mNNjdB+prclme2ibuCOEA==}
     dependencies:
       autoprefixer: 10.4.14_postcss@8.4.21
@@ -1059,7 +1061,7 @@ packages:
       postcss-import: 13.0.0_postcss@8.4.21
       postcss-loader: 4.3.0_siljn5itfbdnhoc2wfrnyt523e
       postcss-url: 10.1.3_postcss@8.4.21
-      semver: 7.3.8
+      semver: 7.5.0
     transitivePeerDependencies:
       - webpack
     dev: true
@@ -1282,7 +1284,7 @@ packages:
   /@nuxtjs/tailwindcss/6.6.4_webpack@5.81.0:
     resolution: {integrity: sha512-Lpgb1EmbHP6URHpi5D373BoNHBnODfnSstZk88SfrJ0r94r4jUaixtmSwLj9ot0wpO3Adz85RIg468/sCc4nAw==}
     dependencies:
-      '@nuxt/kit': 3.3.1
+      '@nuxt/kit': 3.4.3
       '@nuxt/postcss8': 1.1.3_webpack@5.81.0
       autoprefixer: 10.4.14_postcss@8.4.21
       chokidar: 3.5.3
@@ -2860,10 +2862,6 @@ packages:
     resolution: {integrity: sha512-rrrJE6rP0qzl/Srg+C9x/AE5Kxfux7reVm1Wh0wCjuXvih6DqZgqDZe8auTD28fzJ9TF0mHlSDrPpWlujQRo1Q==}
     dev: true
 
-  /console-browserify/1.2.0:
-    resolution: {integrity: sha512-ZMkYO/LkF17QvCPqM0gxw8yUzigAOZOSWSHg91FH6orS7vcEj5dVZTidN2fQ14yBSdg97RqhSNwLUXInd52OTA==}
-    dev: true
-
   /console-control-strings/1.1.0:
     resolution: {integrity: sha512-ty/fTekppD2fIwRvnZAVdeOiGd1c7YXEixbgJTNzqcxJWKQnjJ/V1bNEEE6hygpM3WjwHFUVK6HTjWSzV4a8sQ==}
     dev: true
@@ -2935,6 +2933,10 @@ packages:
       which: 2.0.2
     dev: true
 
+  /crypto-js/4.1.1:
+    resolution: {integrity: sha512-o2JlM7ydqd3Qk9CA0L4NL6mTzU2sdx96a+oOfPu8Mkl/PK51vSyoi8/rQ8NknZtk44vq15lmhAj9CIAGwgeWKw==}
+    dev: false
+
   /css-declaration-sorter/6.3.1_postcss@8.4.21:
     resolution: {integrity: sha512-fBffmak0bPAnyqc/HO8C3n2sHrp9wcqQz6ES9koRF2/mLOVAx9zIQ3Y7R29sYCteTPqMCwns4WYQoCX91Xl3+w==}
     engines: {node: ^10 || ^12 || >=14}
@@ -2958,8 +2960,8 @@ packages:
       postcss-modules-scope: 3.0.0_postcss@8.4.21
       postcss-modules-values: 4.0.0_postcss@8.4.21
       postcss-value-parser: 4.2.0
-      schema-utils: 3.1.1
-      semver: 7.3.8
+      schema-utils: 3.1.2
+      semver: 7.5.0
       webpack: 5.81.0
     dev: true
 
@@ -4193,18 +4195,6 @@ packages:
   /fs.realpath/1.0.0:
     resolution: {integrity: sha512-OO0pH2lK6a0hZnAdau5ItzHPI6pUlvI7jMVnxUQRtw4owF2wk8lOSabtGDCTP4Ggrg2MbGnWO9X8K1t4+fGMDw==}
     dev: true
-
-  /fsevents/1.2.13:
-    resolution: {integrity: sha512-oWb1Z6mkHIskLzEJ/XWX0srkpkTQ7vaopMQkyaEIoq0fmtFVxOthb8cCxeT+p3ynTdkk/RZwbgG4brR5BeWECw==}
-    engines: {node: '>= 4.0'}
-    os: [darwin]
-    deprecated: The v1 package contains DANGEROUS / INSECURE binaries. Upgrade to safe fsevents v2
-    requiresBuild: true
-    dependencies:
-      bindings: 1.5.0
-      nan: 2.17.0
-    dev: true
-    optional: true
 
   /fsevents/2.3.2:
     resolution: {integrity: sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==}
@@ -5604,7 +5594,7 @@ packages:
     transitivePeerDependencies:
       - rollup
       - supports-color
-    dev: false
+    dev: true
 
   /nuxt/3.3.1_j4766f7ecgqbon3u7zlxn5zszu:
     resolution: {integrity: sha512-1DTFXEr+FlZO/hyw765cb9a/AiGysHIGLNl8NGJtURwUWC4gd+Z3y5DnL04PE5fVJ08yB/KJwc0t6StijbL8wQ==}
@@ -5946,11 +5936,6 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
-  /pify/4.0.1:
-    resolution: {integrity: sha512-uB80kBFb/tfd68bVleG9T5GGsGPjJrLAUpR5PZIrhBnIaRTQRjqdJSsIKkOP6OAIFbj7GOrcudc5pNjZ+geV2g==}
-    engines: {node: '>=6'}
-    dev: true
-
   /pinia/2.0.34_p4srtwdgezcoeovfcc2yxzvaue:
     resolution: {integrity: sha512-cgOoGUiyqX0SSgX8XelK9+Ri4XA2/YyNtgjogwfzIx1g7iZTaZPxm7/bZYMCLU2qHRiHhxG7SuQO0eBacFNc2Q==}
     peerDependencies:
@@ -5962,16 +5947,6 @@ packages:
         optional: true
       typescript:
         optional: true
-    dependencies:
-      '@vue/devtools-api': 6.5.0
-      typescript: 5.0.2
-      vue: 3.2.47
-      vue-demi: 0.13.11_vue@3.2.47
-    dev: false
-
-  /pkg-dir/3.0.0:
-    resolution: {integrity: sha512-/E57AYkoeQ25qkxMj5PBOVgF8Kiu/h7cYS30Z5+R7WaiCCBfLq58ZI/dSeaEKb9WVJV5n/03QwrN3IeWIFllvw==}
-    engines: {node: '>=6'}
     dependencies:
       '@vue/devtools-api': 6.5.0
       typescript: 5.0.2
@@ -6164,8 +6139,8 @@ packages:
       klona: 2.0.6
       loader-utils: 2.0.4
       postcss: 8.4.21
-      schema-utils: 3.1.1
-      semver: 7.3.8
+      schema-utils: 3.1.2
+      semver: 7.5.0
       webpack: 5.81.0
     dev: true
 
@@ -6774,15 +6749,6 @@ packages:
 
   /safer-buffer/2.1.2:
     resolution: {integrity: sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==}
-    dev: true
-
-  /schema-utils/3.1.1:
-    resolution: {integrity: sha512-Y5PQxS4ITlC+EahLuXaY86TXfR7Dc5lw294alXOq86JAHCihAIZfqv8nNCWvaEJvaC51uN9hbLGeV0cFBdH+Fw==}
-    engines: {node: '>= 10.13.0'}
-    dependencies:
-      '@types/json-schema': 7.0.11
-      ajv: 6.12.6
-      ajv-keywords: 3.5.2_ajv@6.12.6
     dev: true
 
   /schema-utils/3.1.2:
@@ -7531,28 +7497,6 @@ packages:
       - rollup
     dev: true
 
-  /union-value/1.0.1:
-    resolution: {integrity: sha512-tJfXmxMeWYnczCVs7XAEvIV7ieppALdyepWMkHkwciRpZraG/xwT+s2JN8+pr1+8jCRf80FFzvr+MpQeeoF4Xg==}
-    engines: {node: '>=0.10.0'}
-    dependencies:
-      arr-union: 3.1.0
-      get-value: 2.0.6
-      is-extendable: 0.1.1
-      set-value: 2.0.1
-    dev: true
-
-  /unique-filename/1.1.1:
-    resolution: {integrity: sha512-Vmp0jIp2ln35UTXuryvjzkjGdRyf9b2lTXuSYUiPmzRcl3FDtYqAwOnTJkAngD9SWhnoJzDbTKwaOrZ+STtxNQ==}
-    dependencies:
-      unique-slug: 2.0.2
-    dev: true
-
-  /unique-slug/2.0.2:
-    resolution: {integrity: sha512-zoWr9ObaxALD3DOPfjPSqxt4fnZiWblxHIgeWqW8x7UqDzEtHEQLzji2cuJYQFCU6KmoJikOYAZlrTHHebjx2w==}
-    dependencies:
-      imurmurhash: 0.1.4
-    dev: true
-
   /universalify/2.0.0:
     resolution: {integrity: sha512-hAZsKq7Yy11Zu1DE0OzWjw7nnLZmJZYTDZZyEFHZdUhV8FkH5MCfoU1XMaxXovpyW5nq5scPqq0ZDP9Zyl04oQ==}
     engines: {node: '>= 10.0.0'}
@@ -7632,12 +7576,6 @@ packages:
       - supports-color
     dev: true
 
-  /upath/1.2.0:
-    resolution: {integrity: sha512-aZwGpamFO61g3OlfT7OQCHqhGnW43ieH9WZeP7QxN/G/jS4jfqUkZxoryvJgVPEcrl5NL/ggHsSmLMHuH64Lhg==}
-    engines: {node: '>=4'}
-    dev: true
-    optional: true
-
   /update-browserslist-db/1.0.10_browserslist@4.21.5:
     resolution: {integrity: sha512-OztqDenkfFkbSG+tRxBeAnCVPckDBcvibKd35yDONx6OU8N7sqgwc7rCbkJ/WcYtVRZ4ba68d6byhC21GFh7sQ==}
     hasBin: true
@@ -7656,18 +7594,6 @@ packages:
 
   /util-deprecate/1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
-
-  /util/0.10.3:
-    resolution: {integrity: sha512-5KiHfsmkqacuKjkRkdV7SsfDJ2EGiPsK92s2MhNSY0craxjTdKTtqKsJaCWp4LW33ZZ0OPUv1WO/TFvNQRiQxQ==}
-    dependencies:
-      inherits: 2.0.1
-    dev: true
-
-  /util/0.11.1:
-    resolution: {integrity: sha512-HShAsny+zS2TZfaXxD9tYj4HQGlBezXZMZuM/S5PKLLoZkShZiGk9o5CzukI1LVHZvjdvZ2Sj1aW/Ndn2NB/HQ==}
-    dependencies:
-      inherits: 2.0.3
-    dev: true
 
   /uuid/9.0.0:
     resolution: {integrity: sha512-MXcSTerfPa4uqyzStbRoTgt5XIe3x5+42+q1sDuy3R5MDk66URdLMOZe5aPX/SQd+kuYAh0FdP/pO28IkQyTeg==}
