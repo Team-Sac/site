@@ -1,63 +1,58 @@
+<template>
+  <div>
+    <div id="button-list-streamer">
+      <button @click="opening()">
+        <i :class="close ? 'fa-users' : 'fa-times'" class="fas"></i>
+      </button>
+    </div>
+    <div :hidden="close">
+      <p>Liste Streamers</p>
+      <div class="streamerlist-wrapper"></div>
+      <div class="streamerlist-container">
+        <div
+          v-for="streamer in streamers"
+          :key="streamer"
+          :class="{ isOnline: !streamer.online }"
+          class="streamerlist-element"
+        >
+          <img
+            :alt="`image de profil ${streamer.display_name}`"
+            :src="streamer.profile_image_url"
+            class="streamerlist-icon"
+          />
+          <span v-if="streamer.online" class="streamerlist-online">LIVE</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
 <script lang="ts" setup>
 import { useStreamersStore } from '@/stores/streamersStore';
 
-const streamerStore = useStreamersStore();
-
-streamerStore.getStreamers();
-
-const { getItems } = useDirectusItems();
-
-interface Streamer {
-  id?: string | number;
-  sac: boolean;
-  online: boolean;
-}
-
-const token = useDirectusToken();
-const user = useDirectusUser();
-
-const fetchStreamers = async () => {
-  try {
-    return await getItems<Streamer>({
-      collection: 'streamers',
-    });
-  } catch (e) {
-    throw new Error(e);
-  }
-};
+const emit = defineEmits(['changeSize']);
 
 const streamersStore = useStreamersStore();
 
 const streamers = ref();
 
 onMounted(async () => {
-  const res = await streamersStore.getStreamers();
+  await streamersStore.getStreamers();
   streamers.value = streamersStore.streamers.sort(
     (x, y) => y.online - x.online,
   );
 });
+
+const close = ref(false);
+const opening = () => {
+  close.value = !close.value;
+  emit('changeSize', {
+    element: 'list',
+    type: close.value ? 'close' : 'open',
+  });
+};
 </script>
 
-<template>
-  <p>Liste Streamers</p>
-  <div class="streamerlist-wrapper">
-    <div class="streamerlist-container">
-      <div
-        v-for="streamer in streamers"
-        :key="streamer"
-        class="streamerlist-element"
-        :class="{ isOnline: !streamer.online }"
-      >
-        <img
-          :src="streamer.profile_image_url"
-          :alt="`image de profil ${streamer.display_name}`"
-          class="streamerlist-icon"
-        />
-        <span v-if="streamer.online" class="streamerlist-online">LIVE</span>
-      </div>
-    </div>
-  </div>
-</template>
 <style scoped>
 .streamerlist-wrapper {
   @apply h-screen flex items-center;
