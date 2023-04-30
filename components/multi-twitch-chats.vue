@@ -54,11 +54,17 @@ const minimize = ref(false);
 const opening = () => {
   close.value = !close.value;
   minimize.value = close.value;
-  emit('changeSize', { type: 'closed', isMinimized: close.value });
+  emit('changeSize', {
+    element: 'chat',
+    type: close.value ? 'close' : 'open',
+  });
 };
 const maximize = () => {
   minimize.value = !minimize.value;
-  emit('changeSize', { type: 'minimized', isMinimized: minimize.value });
+  emit('changeSize', {
+    element: 'chat',
+    type: minimize.value ? 'minimize' : 'open',
+  });
 };
 </script>
 

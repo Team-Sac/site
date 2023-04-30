@@ -10,7 +10,7 @@ export default defineEventHandler(async (event) => {
   const streamers = body.streamersNames.join('&login=');
   const data = await fetch(
     `https://api.twitch.tv/helix/users?login=${streamers}`,
-    options
+    options,
   );
   return data.json();
 });
