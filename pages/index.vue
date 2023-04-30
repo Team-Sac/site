@@ -1,43 +1,57 @@
 <template>
   <p>Dingue une première page</p>
-  <div
-    id="twitch-streams"
-    :class="minimize.minimize ? minimize.type : 'maximize'"
-  >
-    <StreamerList></StreamerList>
+  <div id="twitch-streams" :class="gridSize">
+    <StreamerList @change-size="changeSize"></StreamerList>
     <MultiTwitchStreams></MultiTwitchStreams>
     <MultiTwitchChats @change-size="changeSize"></MultiTwitchChats>
   </div>
 </template>
 
 <script lang="ts" setup>
-const minimize = ref({ type: null, minimize: false });
+const listSize = ref<'minmax(0,1fr)' | '30px'>('minmax(0,1fr)');
+const chatSize = ref<'minmax(0,1fr)' | '60px' | '30px'>('minmax(0,1fr)');
+const gridSize = ref<
+  | 'grid-cols-[minmax(0,1fr),3fr,minmax(0,1fr)]'
+  | 'grid-cols-[30px,3fr,minmax(0,1fr)]'
+  | 'grid-cols-[minmax(0,1fr),3fr,60px]'
+  | 'grid-cols-[minmax(0,1fr),3fr,30px]'
+  | 'grid-cols-[30px,3fr,30px]'
+>('grid-cols-[minmax(0,1fr),3fr,minmax(0,1fr)]');
 
 const changeSize = ({
+  element,
   type,
-  isMinimized,
 }: {
-  type?: string;
-  isMinimized: boolean;
+  element: 'list' | 'chat';
+  type: 'minimize' | 'close' | 'open';
 }) => {
-  minimize.value.type = type;
-  minimize.value.minimize = isMinimized;
+  switch (type) {
+    case 'minimize':
+      if (element === 'chat') {
+        chatSize.value = '60px';
+      }
+      break;
+    case 'close':
+      if (element === 'list') {
+        listSize.value = '30px';
+      } else {
+        chatSize.value = '30px';
+      }
+      break;
+    default:
+      if (element === 'list') {
+        listSize.value = 'minmax(0,1fr)';
+      } else {
+        chatSize.value = 'minmax(0,1fr)';
+      }
+      break;
+  }
+  gridSize.value = `grid-cols-[${listSize.value},3fr,${chatSize.value}]`;
 };
 </script>
 
 <style scoped>
 #twitch-streams {
   @apply w-full h-full grid justify-self-center;
-}
-.maximize {
-  @apply grid-cols-[3fr,minmax(0,1fr)];
-}
-
-.closed {
-  @apply grid-cols-[3fr,30px];
-}
-
-.minimized {
-  @apply grid-cols-[3fr,60px];
 }
 </style>
