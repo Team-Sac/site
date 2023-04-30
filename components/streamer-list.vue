@@ -54,6 +54,10 @@ const opening = () => {
 </script>
 
 <style scoped>
+#button-list-streamer {
+  @apply flex justify-end;
+}
+
 .streamerlist-wrapper {
   @apply h-screen flex items-center;
 }
