@@ -30,5 +30,6 @@ export default defineNuxtConfig({
   runtimeConfig: {
     twitchClientId: 'twitch_client_id',
     twitchClientSecret: 'twitch_client_secret',
+    twitchTransportSecret: 'twitch_transport_secret',
   },
 });
