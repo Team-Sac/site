@@ -1,5 +1,4 @@
 <template>
-  <p>Dingue une première page</p>
   <div id="twitch-streams" :class="gridSize">
     <StreamerList @change-size="changeSize"></StreamerList>
     <MultiTwitchStreams></MultiTwitchStreams>
@@ -52,6 +51,6 @@ const changeSize = ({
 
 <style scoped>
 #twitch-streams {
-  @apply w-full h-full grid justify-self-center;
+  @apply w-full h-[calc(100%-1.75rem)] grid overflow-hidden;
 }
 </style>

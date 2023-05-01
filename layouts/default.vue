@@ -1,5 +1,5 @@
 <template>
-  <div id="layout">
+  <div id="layout" ref="layout">
     <header-base></header-base>
     <slot></slot>
   </div>
@@ -9,6 +9,6 @@
 
 <style scoped>
 div#layout {
-  @apply h-screen grid grid-rows-[30px,30px,25fr];
+  @apply h-screen;
 }
 </style>

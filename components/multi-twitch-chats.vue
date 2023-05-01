@@ -74,7 +74,7 @@ const maximize = () => {
 }
 
 #buttons-twitch-chat {
-  @apply flex justify-start items-center;
+  @apply flex justify-start;
 }
 
 .multi-chats {
