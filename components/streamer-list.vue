@@ -13,7 +13,7 @@
       <div
         v-for="streamer in streamers"
         :key="streamer"
-        :class="{ isOnline: !streamer.online }"
+        :class="streamer.online ? 'online' : 'offline'"
         class="element-streamer-list"
         @click="streamsStore.toggle(streamer.display_name)"
       >
@@ -97,11 +97,15 @@ const opening = () => {
 }
 
 .element-streamer-list {
-  @apply flex items-center p-3 relative cursor-pointer hover:bg-gray-100 hover:shadow-lg;
+  @apply flex items-center p-3 relative cursor-pointer hover:bg-gray-100 hover:shadow-lg rounded-lg;
 }
 
 .icon-streamer-list {
   @apply h-20 w-20 rounded-full object-cover mr-3;
+}
+
+.offline {
+  @apply bg-gray-200 grayscale;
 }
 
 .hide,
