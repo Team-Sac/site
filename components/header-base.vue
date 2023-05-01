@@ -36,6 +36,6 @@ const { logout } = useDirectusAuth();
 
 <style scoped>
 .header {
-  @apply flex justify-around bg-white;
+  @apply flex sticky top-0 justify-around bg-white h-7;
 }
 </style>
