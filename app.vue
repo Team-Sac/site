@@ -18,8 +18,8 @@ useHead({
 });
 
 onMounted(async () => {
-  const user = useDirectusUser();
-  if (user.value) return;
+  const { refreshToken } = useDirectusToken();
+  if (refreshToken.value) return;
 
   const { setToken } = useDirectusAuth();
   try {
@@ -31,12 +31,8 @@ onMounted(async () => {
     ).json();
 
     if (data === undefined) return;
-
-    setToken(data.access_token);
-  } catch (e) {
-    // eslint-disable-next-line no-console
-    console.error(e);
-  }
+    setToken(data.access_token, data.refresh_token, data.expires);
+  } catch (e) {}
 });
 </script>
 

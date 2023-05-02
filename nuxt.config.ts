@@ -2,12 +2,17 @@
 export default defineNuxtConfig({
   app: {
     head: {
-      title: 'Team Sac',
+      title: 'Les Sacs',
       charset: 'utf8',
       link: [
         {
           rel: 'stylesheet',
           href: 'https://use.fontawesome.com/releases/v5.15.4/css/all.css',
+        },
+        {
+          rel: 'icon',
+          type: 'image/x-icon',
+          href: '/logo_team_sac.png',
         },
       ],
     },
