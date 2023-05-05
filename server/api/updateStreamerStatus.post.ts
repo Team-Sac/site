@@ -4,10 +4,6 @@ export default defineEventHandler(async (event) => {
   const body = await readRawBody(event);
   const { headers } = event.node.req;
 
-  const config = useRuntimeConfig();
-
-  const { updateItem } = useDirectusItems();
-
   // Notification request headers
   const TWITCH_MESSAGE_ID = 'Twitch-Eventsub-Message-Id'.toLowerCase();
   // eslint-disable-next-line
@@ -25,10 +21,30 @@ export default defineEventHandler(async (event) => {
   // Prepend this string to the HMAC that's created from the message
   const HMAC_PREFIX = 'sha256=';
 
-  interface Streamer {
-    id: string;
-    sac: boolean;
-    online: boolean;
+  const config = useRuntimeConfig();
+
+  function getSecret() {
+    return config.twitchTransportSecret;
+  }
+
+  // Build the message used to get the HMAC.
+  function getHmacMessage(request: any) {
+    return (
+      request[TWITCH_MESSAGE_ID] + request[TWITCH_MESSAGE_TIMESTAMP] + body
+    );
+  }
+
+  // Get the HMAC.
+  function getHmac(secret: crypto.BinaryLike, message: any) {
+    return crypto.createHmac('sha256', secret).update(message).digest('hex');
+  }
+
+  // Verify whether our hash matches the hash that Twitch passed in the header.
+  function verifyMessage(hmac: String, verifySignature: any) {
+    return crypto.timingSafeEqual(
+      Buffer.from(hmac),
+      Buffer.from(verifySignature),
+    );
   }
 
   const secret = getSecret();
@@ -45,13 +61,25 @@ export default defineEventHandler(async (event) => {
       console.log(`Event type: ${notification.subscription.type}`);
       console.log(JSON.stringify(notification.event, null, 4));
 
+      fetch(
+        'https://directus.teamsac.xyz/flows/trigger/7d41730f-4083-4bd1-b6e0-ca8979356368',
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            id: notification.event.broadcaster_user_name,
+            status: notification.subscription.type === 'stream.online',
+          }),
+        },
+      )
+        .then((response) => response.json())
+        .then((jsonResponse) => {
+          console.log(jsonResponse);
+        });
+
       switch (notification.subscription.type) {
         case 'stream.online':
           console.log('Going live');
-          updateDirectusStreamerStatus(
-            notification.event.broadcaster_user_login,
-            true,
-          );
           break;
         case 'stream.offline':
           console.log('Stopping live');
@@ -82,43 +110,5 @@ export default defineEventHandler(async (event) => {
   } else {
     console.log("403 Signatures didn't match."); // Signatures didn't match.
     setResponseStatus(event, 403);
-  }
-
-  function getSecret() {
-    return config.twitchTransportSecret;
-  }
-
-  // Build the message used to get the HMAC.
-  function getHmacMessage(request) {
-    return (
-      request[TWITCH_MESSAGE_ID] + request[TWITCH_MESSAGE_TIMESTAMP] + body
-    );
-  }
-
-  // Get the HMAC.
-  function getHmac(secret, message) {
-    return crypto.createHmac('sha256', secret).update(message).digest('hex');
-  }
-
-  // Verify whether our hash matches the hash that Twitch passed in the header.
-  function verifyMessage(hmac, verifySignature) {
-    return crypto.timingSafeEqual(
-      Buffer.from(hmac),
-      Buffer.from(verifySignature),
-    );
-  }
-
-  async function updateDirectusStreamerStatus(
-    streamerId: String,
-    status: Boolean,
-  ) {
-    try {
-      const newStatus = { online: status };
-      await updateItem<Streamer>({
-        collection: 'streamers',
-        id: 'test',
-        item: newStatus,
-      });
-    } catch (e) {}
   }
 });

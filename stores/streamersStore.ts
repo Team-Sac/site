@@ -32,7 +32,6 @@ export const useStreamersStore = defineStore('streamers', () => {
     const { getToken } = useUserStore();
 
     const token = await getToken();
-
     const res = await useFetch('/api/getTwitchStreamers', {
       method: 'POST',
       body: {
@@ -45,8 +44,7 @@ export const useStreamersStore = defineStore('streamers', () => {
     directusStreamers.forEach((dStreamer) => {
       // Get id of streamer in streamers array
       const streamerId = streamers.value.findIndex(
-        (streamer) =>
-          streamer.display_name.toLowerCase() === dStreamer.id.toLowerCase(),
+        (streamer) => streamer.display_name.toLowerCase() === dStreamer.id.toLowerCase(),
       );
       // Update this streamer online status
       streamers.value[streamerId].online = dStreamer.online;
