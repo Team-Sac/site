@@ -3,7 +3,9 @@
     <NuxtLink to="/">
       <img id="team-sac-logo" alt="Logo Team Sac" src="/logo_team_sac.png" />
     </NuxtLink>
-    <NuxtLink to="32HZP9qrnV">
+    <NuxtLink to="about">Qui sommes-nous ?</NuxtLink>
+    <NuxtLink to="announce">Annonces</NuxtLink>
+    <NuxtLink target="_blank" to="https://discord.gg/32HZP9qrnV">
       <i class="fab fa-discord"></i>
       Discord
     </NuxtLink>
@@ -27,6 +29,10 @@ const { logout } = useDirectusAuth();
 </script>
 
 <style scoped>
+a {
+  @apply cursor-pointer;
+}
+
 .header {
   @apply flex justify-around bg-white items-center;
 }
