@@ -32,7 +32,6 @@ export const useStreamersStore = defineStore('streamers', () => {
     const { getToken } = useUserStore();
 
     const token = await getToken();
-
     const res = await useFetch('/api/getTwitchStreamers', {
       method: 'POST',
       body: {
