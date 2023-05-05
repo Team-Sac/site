@@ -3,6 +3,10 @@
     <NuxtLink to="/">
       <img id="team-sac-logo" alt="Logo Team Sac" src="/logo_team_sac.png" />
     </NuxtLink>
+    <NuxtLink to="32HZP9qrnV">
+      <i class="fab fa-discord"></i>
+      Discord
+    </NuxtLink>
     <NuxtLink
       v-if="!refreshToken"
       to="https://directus.teamsac.xyz/auth/login/twitch?redirect=http://localhost:3000"
