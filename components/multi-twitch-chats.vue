@@ -74,7 +74,7 @@ const maximize = () => {
 }
 
 #buttons-twitch-chat {
-  @apply flex justify-start items-center;
+  @apply flex justify-start;
 }
 
 .multi-chats {
@@ -102,6 +102,6 @@ const maximize = () => {
 }
 
 .tabs-chat {
-  @apply m-2 w-1/3 text-ellipsis overflow-hidden whitespace-nowrap;
+  @apply p-2 text-ellipsis overflow-hidden whitespace-nowrap;
 }
 </style>

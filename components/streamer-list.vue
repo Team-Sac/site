@@ -1,27 +1,28 @@
 <template>
-  <div>
-    <div id="button-list-streamer">
+  <div id="streamer-list">
+    <div id="button-streamer-list" :class="close ? 'close' : 'open'">
       <button @click="opening()">
         <i :class="close ? 'fa-users' : 'fa-times'" class="fas"></i>
       </button>
     </div>
-    <div :hidden="close">
-      <p>Liste Streamers</p>
-      <div class="streamerlist-wrapper"></div>
-      <div class="streamerlist-container">
-        <div
-          v-for="streamer in streamers"
-          :key="streamer"
-          :class="{ isOnline: !streamer.online }"
-          class="streamerlist-element"
-        >
-          <img
-            :alt="`image de profil ${streamer.display_name}`"
-            :src="streamer.profile_image_url"
-            class="streamerlist-icon"
-          />
-          <span v-if="streamer.online" class="streamerlist-online">LIVE</span>
-        </div>
+    <div
+      :class="close ? 'hidden' : ''"
+      :hidden="close"
+      class="container-streamer-list"
+    >
+      <div
+        v-for="streamer in streamers"
+        :key="streamer"
+        :class="streamer.online ? 'online' : 'offline'"
+        class="element-streamer-list"
+        @click="streamsStore.toggle(streamer.display_name)"
+      >
+        <img
+          :alt="`image de profil ${streamer.display_name}`"
+          :src="streamer.profile_image_url"
+          class="icon-streamer-list"
+        />
+        <p class="name-streamer-list">{{ streamer.display_name }}</p>
       </div>
     </div>
   </div>
@@ -29,17 +30,38 @@
 
 <script lang="ts" setup>
 import { useStreamersStore } from '@/stores/streamersStore';
+import { Ref } from 'vue';
+import { useStreamsStore } from '~/stores/streamsStore';
 
 const emit = defineEmits(['changeSize']);
 
 const streamersStore = useStreamersStore();
+const streamsStore = useStreamsStore();
 
-const streamers = ref();
+type Streamer = {
+  broadcaster_type: string;
+  created_at: string;
+  description: string;
+  display_name: string;
+  id: string;
+  login: string;
+  offline_image_url: string;
+  online: boolean;
+  profile_image_url: string;
+  type: string;
+  view_count: number;
+};
+
+const streamers: Ref<Streamer[]> = ref();
 
 onMounted(async () => {
   await streamersStore.getStreamers();
   streamers.value = streamersStore.streamers.sort(
     (x, y) => y.online - x.online,
+  );
+  streamsStore.toggle(
+    streamers.value[Math.floor(Math.random() * streamers.value.length)]
+      .display_name,
   );
 });
 
@@ -54,22 +76,40 @@ const opening = () => {
 </script>
 
 <style scoped>
-.streamerlist-wrapper {
-  @apply h-screen flex items-center;
+#button-streamer-list {
+  @apply flex justify-end;
 }
-.streamerlist-container {
-  @apply h-[70%] overflow-auto flex flex-col gap-y-6;
+
+.open > button {
+  @apply w-[10%];
 }
-.streamerlist-icon {
-  @apply rounded-full w-20 h-20;
+
+.close > button {
+  @apply w-full;
 }
-.streamerlist-element {
-  @apply relative;
+
+#streamer-list {
+  @apply grid grid-rows-[30px,1fr] overflow-hidden;
 }
-.streamerlist-element.isOnline .streamerlist-icon {
-  @apply border-4 border-white;
+
+.container-streamer-list {
+  @apply flex flex-col overflow-y-auto overflow-x-hidden relative self-center;
 }
-.streamerlist-online {
-  @apply absolute -bottom-2.5 left-1/2 -translate-x-1/2;
+
+.element-streamer-list {
+  @apply flex items-center p-3 relative cursor-pointer hover:bg-gray-100 hover:shadow-lg rounded-lg;
+}
+
+.icon-streamer-list {
+  @apply h-20 w-20 rounded-full object-cover mr-3;
+}
+
+.offline {
+  @apply bg-gray-200 grayscale;
+}
+
+.hide,
+.hidden {
+  display: none;
 }
 </style>
