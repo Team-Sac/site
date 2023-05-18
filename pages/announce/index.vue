@@ -14,12 +14,16 @@
           name="content"
           rows="10"
         ></textarea>
+        <label for="url">
+          URL to an announce or an image
+          <input id="url" v-model="urlNew" name="url" type="text" />
+        </label>
       </label>
       <button @click="newAnnounce">Créer une annonce</button>
     </form>
     <ClientOnly fallback="Chargement des annonces..." fallback-tag="span">
       <article
-        v-for="{ id, title, content, date_created } in announces"
+        v-for="{ id, title, content, url, date_created } in announces"
         :key="id"
         class="announce"
       >
@@ -36,6 +40,9 @@
         <button v-if="hasRight" @click="() => removeAnnounce(id)">
           <i class="fas fa-trash"></i>
         </button>
+        <NuxtLink v-if="url" :to="url" target="_blank"
+          >Plus de Détails</NuxtLink
+        >
       </article>
     </ClientOnly>
   </div>
@@ -63,12 +70,18 @@ await fetchAnnounces();
 
 const titleNew = ref('');
 const contentNew = ref('');
+const urlNew = ref('');
 
 const newAnnounce = async (e) => {
   e.preventDefault();
-  await createAnnounce({ title: titleNew.value, content: contentNew.value });
+  await createAnnounce({
+    title: titleNew.value,
+    content: contentNew.value,
+    url: urlNew.value,
+  });
   titleNew.value = '';
   contentNew.value = '';
+  urlNew.value = '';
 };
 const removeAnnounce = async (id) => {
   await deleteAnnounce(id);
