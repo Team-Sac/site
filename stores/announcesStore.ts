@@ -23,9 +23,11 @@ export const useAnnouncesStore = defineStore('announces', () => {
   const createAnnounce = async ({
     title,
     content,
+    url,
   }: {
     title: string;
-    content: string;
+    content?: string;
+    url?: string;
   }) => {
     try {
       await createItems<Announce>({
@@ -34,6 +36,7 @@ export const useAnnouncesStore = defineStore('announces', () => {
           {
             title,
             content,
+            url,
           },
         ],
       });
