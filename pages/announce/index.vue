@@ -67,6 +67,8 @@ const contentNew = ref('');
 const newAnnounce = async (e) => {
   e.preventDefault();
   await createAnnounce({ title: titleNew.value, content: contentNew.value });
+  titleNew.value = '';
+  contentNew.value = '';
 };
 const removeAnnounce = async (id) => {
   await deleteAnnounce(id);
