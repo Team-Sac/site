@@ -12,14 +12,10 @@ export const useStreamersStore = defineStore('streamers', () => {
   const { getItems } = useDirectusItems();
   const streamers = ref<Streamer[]>([]);
 
-  const filters = { sac: true };
   const fetchDirectusStreamers = async (): Promise<Streamer[]> => {
     try {
       return getItems<Streamer[]>({
         collection: 'streamers',
-        params: {
-          filter: filters,
-        },
       });
     } catch (e) {
       throw new Error((e as Error).message);
