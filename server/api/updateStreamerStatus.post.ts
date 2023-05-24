@@ -71,7 +71,7 @@ export default defineEventHandler(async (event): Promise<void> => {
               authorization: `Bearer ${process.env.NUXT_DIRECTUS_SECRET_KEY}`,
             },
             body: JSON.stringify({
-              online: true,
+              online: notification.subscription.type === 'stream.online',
             }),
           },
         );
