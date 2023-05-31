@@ -15,21 +15,21 @@
         :key="streamer"
         :class="streamer.online ? 'online' : 'offline'"
         class="element-streamer-list"
-        @click="streamsStore.toggle(streamer.display_name)"
+        @click="streamsStore.toggle(streamer.id)"
       >
         <img
-          :alt="`image de profil ${streamer.display_name}`"
+          :alt="`image de profil ${streamer.id}`"
           :src="streamer.profile_image_url"
           class="icon-streamer-list"
         />
-        <p class="name-streamer-list">{{ streamer.display_name }}</p>
+        <p class="name-streamer-list">{{ streamer.id }}</p>
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { useStreamersStore } from '@/stores/streamersStore';
+import { Streamer, useStreamersStore } from '@/stores/streamersStore';
 import { Ref } from 'vue';
 import { useStreamsStore } from '~/stores/streamsStore';
 
@@ -38,20 +38,6 @@ const emit = defineEmits(['changeSize']);
 const streamersStore = useStreamersStore();
 const streamsStore = useStreamsStore();
 
-type Streamer = {
-  broadcaster_type: string;
-  created_at: string;
-  description: string;
-  display_name: string;
-  id: string;
-  login: string;
-  offline_image_url: string;
-  online: boolean;
-  profile_image_url: string;
-  type: string;
-  view_count: number;
-};
-
 const streamers: Ref<Streamer[]> = ref();
 
 onMounted(async () => {
@@ -59,10 +45,11 @@ onMounted(async () => {
   streamers.value = streamersStore.streamers.sort(
     (x, y) => y.online - x.online,
   );
-  streamsStore.toggle(
-    streamers.value[Math.floor(Math.random() * streamers.value.length)]
-      .display_name,
-  );
+  if (streamsStore.streams.length === 0) {
+    streamsStore.toggle(
+      streamers.value[Math.floor(Math.random() * streamers.value.length)].id,
+    );
+  }
 });
 
 const close = ref(false);
