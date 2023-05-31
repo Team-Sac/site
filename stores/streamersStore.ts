@@ -1,12 +1,12 @@
 import { defineStore } from 'pinia';
-
-import { useUserStore } from '@/stores/userStore';
+import { useUserStore } from '~/stores/userStore';
 
 export interface Streamer {
   id: string;
   sac: boolean;
   online: boolean;
   description: string;
+  profile_image_url: string;
 }
 
 export interface StreamerTwitch {
@@ -24,46 +24,66 @@ export interface StreamerTwitch {
 }
 
 export const useStreamersStore = defineStore('streamers', () => {
-  const { getItems } = useDirectusItems();
-  const streamers = ref<StreamerTwitch[]>([]);
+  const { getItems, updateItem } = useDirectusItems();
+  const streamers = ref<Streamer[]>([]);
+  const sacs = ref<Streamer[]>([]);
 
   const fetchDirectusStreamers = async (): Promise<Streamer[]> => {
     try {
-      return getItems<Streamer[]>({
+      streamers.value = await getItems<Streamer[]>({
         collection: 'streamers',
       });
+      sacs.value = streamers.value.filter((streamer) => streamer.sac);
+    } catch (e) {
+      throw new Error((e as Error).message);
+    }
+    return streamers.value;
+  };
+
+  const updateStreamers = async (streamersNames: string[]) => {
+    try {
+      const { getToken } = useUserStore();
+
+      const token = await getToken();
+
+      const { data } = await useFetch('/api/getTwitchStreamers', {
+        method: 'POST',
+        body: {
+          bearer: token.value,
+          streamersNames,
+        },
+      });
+      const res = data.value.data.map((streamer: Streamer) => streamer);
+      await Promise.allSettled(
+        res.map(async (streamer: StreamerTwitch) => {
+          await updateItem({
+            collection: 'streamers',
+            id: streamer.display_name,
+            item: {
+              description: streamer.description,
+              profile_image_url: streamer.profile_image_url,
+            },
+          });
+        }),
+      );
     } catch (e) {
       throw new Error((e as Error).message);
     }
   };
 
-  async function getStreamers(): Promise<globalThis.Ref<Streamer[]>> {
-    const directusStreamers = await fetchDirectusStreamers();
-    const streamersNames = directusStreamers.map((streamer) => streamer.id);
-    const { getToken } = useUserStore();
+  const getStreamers = async () => {
+    if (streamers.value.length === 0) {
+      streamers.value = await fetchDirectusStreamers();
+    }
 
-    const token = await getToken();
-    const res = await useFetch('/api/getTwitchStreamers', {
-      method: 'POST',
-      body: {
-        bearer: token.value,
-        streamersNames,
-      },
-    });
-    const { data } = await res;
-    streamers.value = data.value.data;
-    directusStreamers.forEach((dStreamer) => {
-      // Get id of streamer in streamers array
-      const streamerId = streamers.value.findIndex(
-        (streamer) =>
-          streamer.display_name.toLowerCase() === dStreamer.id.toLowerCase(),
-      );
+    return streamers;
+  };
 
-      // Update this streamer online status
-      streamers.value[streamerId].online = dStreamer.online;
-    });
-    return data;
-  }
-
-  return { streamers, getStreamers };
+  return {
+    streamers,
+    sacs,
+    fetchDirectusStreamers,
+    getStreamers,
+    updateStreamers,
+  };
 });
