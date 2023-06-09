@@ -10,6 +10,7 @@
       :hidden="close"
       class="container-streamer-list"
     >
+      <SearchStreamer></SearchStreamer>
       <div
         v-for="streamer in streamers"
         :key="streamer"
@@ -32,6 +33,22 @@
 import { Streamer, useStreamersStore } from '@/stores/streamersStore';
 import { Ref } from 'vue';
 import { useStreamsStore } from '~/stores/streamsStore';
+import SearchStreamer from '~/components/search-streamer.vue';
+
+export interface StreamerSearch {
+  broadcaster_language: string;
+  broadcaster_login: string;
+  display_name: string;
+  game_id: string;
+  game_name: string;
+  id: string;
+  is_live: boolean;
+  started_at: string;
+  tag_ids: Array<string>;
+  tags: Array<string>;
+  thumbnail_url: string;
+  title: string;
+}
 
 const emit = defineEmits(['changeSize']);
 
