@@ -53,7 +53,7 @@ export const useStreamersStore = defineStore('streamers', () => {
           streamersNames,
         },
       });
-      const res = data.value.data.map((streamer: Streamer) => streamer);
+      const res = data.value?.data.map((streamer: Streamer) => streamer);
       await Promise.allSettled(
         res.map(async (streamer: StreamerTwitch) => {
           await updateItem({
