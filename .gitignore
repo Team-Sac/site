@@ -9,3 +9,4 @@ dist
 .nuxt-storybook
 storybook-static
 .idea
+.unlighthouse
