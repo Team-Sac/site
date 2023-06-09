@@ -7,10 +7,13 @@ export default defineEventHandler(async (event): Promise<object> => {
       'Client-Id': config.twitchClientId,
     },
   };
-  const streamers = body.streamersNames.join('&login=');
+
+  const query = `?query=${body.query}&first=10`;
+
   const data = await fetch(
-    `https://api.twitch.tv/helix/users?login=${streamers}`,
+    `https://api.twitch.tv/helix/search/channels${query}`,
     options,
   );
+
   return data.json();
 });

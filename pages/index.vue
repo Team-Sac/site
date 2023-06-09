@@ -51,6 +51,6 @@ const changeSize = ({
 
 <style scoped>
 #twitch-streams {
-  @apply w-full h-[calc(100%-1.75rem)] grid overflow-hidden;
+  @apply w-full h-[calc(100%-2.5rem)] grid overflow-hidden;
 }
 </style>
