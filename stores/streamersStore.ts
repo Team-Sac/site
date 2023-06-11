@@ -42,9 +42,13 @@ export const useStreamersStore = defineStore('streamers', () => {
     return streamers.value;
   };
 
-  const updateDirectusStreamer = async (
-    streamerName: string,
-  ): Promise<Streamer[]> => {
+  const updateDirectusStreamer = async ({
+    streamerName,
+    thumbnailURL,
+  }: {
+    streamerName: string;
+    thumbnailURL: string;
+  }): Promise<Streamer[]> => {
     if (
       streamers.value.some(
         (streamer) => streamer.id.toLowerCase() === streamerName.toLowerCase(),
@@ -60,7 +64,14 @@ export const useStreamersStore = defineStore('streamers', () => {
         id: user.value.id,
         user: {
           streamers: {
-            create: [{ streamers_id: { id: streamerName } }],
+            create: [
+              {
+                streamers_id: {
+                  id: streamerName,
+                  profile_image_url: thumbnailURL,
+                },
+              },
+            ],
             update: [],
             delete: [],
           },
@@ -89,18 +100,17 @@ export const useStreamersStore = defineStore('streamers', () => {
       });
       // @ts-ignore
       const res = data.value?.data.map((streamer: Streamer) => streamer);
-      await Promise.allSettled(
-        res.map(async (streamer: StreamerTwitch) => {
-          await updateItem({
-            collection: 'streamers',
-            id: streamer.display_name,
-            item: {
-              description: streamer.description,
-              profile_image_url: streamer.profile_image_url,
-            },
-          });
-        }),
-      );
+
+      res.map(async (streamer: StreamerTwitch) => {
+        await updateItem({
+          collection: 'streamers',
+          id: streamer.display_name,
+          item: {
+            description: streamer.description,
+            profile_image_url: streamer.profile_image_url,
+          },
+        });
+      });
     } catch (e) {
       throw new Error((e as Error).message);
     }
