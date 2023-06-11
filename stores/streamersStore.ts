@@ -25,6 +25,8 @@ export interface StreamerTwitch {
 
 export const useStreamersStore = defineStore('streamers', () => {
   const { getItems, updateItem } = useDirectusItems();
+  const user = useDirectusUser();
+  const { updateUser } = useDirectusUsers();
   const streamers = ref<Streamer[]>([]);
   const sacs = ref<Streamer[]>([]);
 
@@ -37,6 +39,38 @@ export const useStreamersStore = defineStore('streamers', () => {
     } catch (e) {
       throw new Error((e as Error).message);
     }
+    return streamers.value;
+  };
+
+  const updateDirectusStreamer = async (
+    streamerName: string,
+  ): Promise<Streamer[]> => {
+    if (
+      streamers.value.some(
+        (streamer) => streamer.id.toLowerCase() === streamerName.toLowerCase(),
+      )
+    ) {
+      return streamers.value;
+    }
+
+    if (!user.value) return streamers.value;
+
+    try {
+      await updateUser({
+        id: user.value.id,
+        user: {
+          streamers: {
+            create: [{ streamers_id: { id: streamerName } }],
+            update: [],
+            delete: [],
+          },
+        },
+      });
+      await fetchDirectusStreamers();
+    } catch (e) {
+      throw new Error((e as Error).message);
+    }
+
     return streamers.value;
   };
 
@@ -53,6 +87,7 @@ export const useStreamersStore = defineStore('streamers', () => {
           streamersNames,
         },
       });
+      // @ts-ignore
       const res = data.value?.data.map((streamer: Streamer) => streamer);
       await Promise.allSettled(
         res.map(async (streamer: StreamerTwitch) => {
@@ -83,6 +118,7 @@ export const useStreamersStore = defineStore('streamers', () => {
     streamers,
     sacs,
     fetchDirectusStreamers,
+    updateDirectusStreamer,
     getStreamers,
     updateStreamers,
   };

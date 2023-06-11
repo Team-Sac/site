@@ -10,30 +10,32 @@
       :hidden="close"
       class="container-streamer-list"
     >
-      <SearchStreamer></SearchStreamer>
-      <div
-        v-for="streamer in streamers"
-        :key="streamer"
-        :class="streamer.online ? 'online' : 'offline'"
-        class="element-streamer-list"
-        @click="streamsStore.toggle(streamer.id)"
-      >
-        <img
-          :alt="`image de profil ${streamer.id}`"
-          :src="streamer.profile_image_url"
-          class="icon-streamer-list"
-        />
-        <p class="name-streamer-list">{{ streamer.id }}</p>
+      <SearchStreamer v-if="hasRight"></SearchStreamer>
+      <div class="streamers">
+        <div
+          v-for="streamer in streamers"
+          :key="streamer"
+          :class="streamer.online ? 'online' : 'offline'"
+          class="element-streamer-list"
+          @click="streamsStore.toggle(streamer.id)"
+        >
+          <img
+            :alt="`image de profil ${streamer.id}`"
+            :src="streamer.profile_image_url"
+            class="icon-streamer-list"
+          />
+          <p class="name-streamer-list">{{ streamer.id }}</p>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { Streamer, useStreamersStore } from '@/stores/streamersStore';
-import { Ref } from 'vue';
+import { useStreamersStore } from '@/stores/streamersStore';
 import { useStreamsStore } from '~/stores/streamsStore';
 import SearchStreamer from '~/components/search-streamer.vue';
+import { DirectusUser } from 'nuxt-directus/dist/runtime/types';
 
 export interface StreamerSearch {
   broadcaster_language: string;
@@ -55,13 +57,11 @@ const emit = defineEmits(['changeSize']);
 const streamersStore = useStreamersStore();
 const streamsStore = useStreamsStore();
 
-const streamers: Ref<Streamer[]> = ref();
+const streamers = computed(() => streamersStore.streamers);
 
 onMounted(async () => {
   await streamersStore.getStreamers();
-  streamers.value = streamersStore.streamers.sort(
-    (x, y) => y.online - x.online,
-  );
+  streamers.value.sort((x, y) => y.online - x.online);
   if (streamsStore.streams.length === 0) {
     streamsStore.toggle(
       streamers.value[Math.floor(Math.random() * streamers.value.length)].id,
@@ -77,6 +77,15 @@ const opening = () => {
     type: close.value ? 'close' : 'open',
   });
 };
+
+const user = computed<DirectusUser>(() => useDirectusUser().value);
+
+const hasRight = computed(() =>
+  [
+    'e5c8b057-49ff-4781-af76-ab555f5a0465',
+    'bdb50fa6-c41d-4b5f-8d23-91d4f3748533',
+  ].includes(user.value?.role),
+);
 </script>
 
 <style scoped>
@@ -97,7 +106,11 @@ const opening = () => {
 }
 
 .container-streamer-list {
-  @apply flex flex-col overflow-y-auto overflow-x-hidden relative self-center;
+  @apply grid grid-rows-[minmax(30px,auto),1fr] overflow-hidden;
+}
+
+.streamers {
+  @apply flex flex-col overflow-y-auto overflow-x-hidden relative self-center h-full;
 }
 
 .element-streamer-list {
