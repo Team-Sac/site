@@ -61,16 +61,6 @@ const hasRight = computed(() =>
   ].includes(user.value?.role),
 );
 
-/*
-{
-  if (!user.value) return false;
-  return [
-    'e5c8b057-49ff-4781-af76-ab555f5a0465',
-    'bdb50fa6-c41d-4b5f-8d23-91d4f3748533',
-  ].includes(user.value?.role);
-});
-*/
-
 const { fetchAnnounces, createAnnounce, deleteAnnounce } = useAnnouncesStore();
 
 const announces = computed<Announce[]>(() => useAnnouncesStore().announces);

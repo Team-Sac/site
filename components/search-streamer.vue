@@ -15,6 +15,7 @@
         v-for="streamer in searchResult"
         :key="streamer.id"
         class="searchResult"
+        @click="addFollowedStreamer(streamer.display_name)"
       >
         <img :alt="streamer.display_name" :src="streamer.thumbnail_url" />
         <p>
@@ -29,6 +30,7 @@
 import { Ref } from 'vue';
 import { useUserStore } from '~/stores/userStore';
 import { StreamerSearch } from '~/components/streamer-list.vue';
+import { useStreamersStore } from '~/stores/streamersStore';
 
 const searchText = ref('');
 const searchResult: Ref<StreamerSearch[]> = ref<StreamerSearch>();
@@ -46,9 +48,18 @@ const searchChannels = useDebounceFn(async () => {
   });
   searchResult.value = data.value.data;
 }, 500);
+
+const { updateDirectusStreamer } = useStreamersStore();
+
+const addFollowedStreamer = async (streamerName: string) => {
+  await updateDirectusStreamer(streamerName);
+};
 </script>
 
 <style scoped>
+.search {
+  @apply relative;
+}
 #channel-list {
   @apply absolute z-10 bg-white w-full overflow-x-auto;
 }
