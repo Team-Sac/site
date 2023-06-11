@@ -6,11 +6,11 @@
         id="streamer-search"
         v-model="searchText"
         name="streamer-search"
-        type="text"
+        type="search"
         @keyup="searchChannels"
       />
     </label>
-    <div id="channel-list">
+    <div v-if="searchText !== ''" id="channel-list">
       <div
         v-for="streamer in searchResult"
         :key="streamer.id"
@@ -53,6 +53,7 @@ const { updateDirectusStreamer } = useStreamersStore();
 
 const addFollowedStreamer = async (streamerName: string) => {
   await updateDirectusStreamer(streamerName);
+  searchText.value = '';
 };
 </script>
 
