@@ -17,7 +17,7 @@
           :key="streamer"
           :class="streamer.online ? 'online' : 'offline'"
           class="element-streamer-list"
-          @click="streamsStore.toggle(streamer.id)"
+          @click.self="streamsStore.toggle(streamer.id)"
         >
           <img
             :alt="`image de profil ${streamer.id}`"
@@ -25,6 +25,13 @@
             class="icon-streamer-list"
           />
           <p class="name-streamer-list">{{ streamer.id }}</p>
+          <button
+            v-if="!streamer.sac"
+            class="unfollow-streamer"
+            @click="removeFollowedStreamer(streamer.users[0])"
+          >
+            <i class="fas fa-times"></i>
+          </button>
         </div>
       </div>
     </div>
@@ -86,6 +93,12 @@ const hasRight = computed(() =>
     'bdb50fa6-c41d-4b5f-8d23-91d4f3748533',
   ].includes(user.value?.role),
 );
+
+const removeFollowedStreamer = async (streamerRelationId: string) => {
+  await streamersStore.unfollowDirectusStreamer({
+    streamerRelationId,
+  });
+};
 </script>
 
 <style scoped>
@@ -114,11 +127,19 @@ const hasRight = computed(() =>
 }
 
 .element-streamer-list {
-  @apply flex items-center p-3 relative cursor-pointer hover:bg-gray-100 hover:shadow-lg rounded-lg;
+  @apply grid grid-cols-[5rem,1fr,20px] items-center p-3 m-1 relative cursor-pointer hover:bg-gray-100 hover:shadow-lg;
 }
 
 .icon-streamer-list {
   @apply h-20 w-20 rounded-full object-cover mr-3;
+}
+
+.name-streamer-list {
+  @apply overflow-hidden text-ellipsis pl-2;
+}
+
+.unfollow-streamer {
+  @apply w-full hover:bg-gray-300;
 }
 
 .offline {

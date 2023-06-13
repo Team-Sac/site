@@ -49,7 +49,7 @@ const searchChannels = useDebounceFn(async () => {
   searchResult.value = data.value.data;
 }, 500);
 
-const { updateDirectusStreamer } = useStreamersStore();
+const { followDirectusStreamer } = useStreamersStore();
 
 const addFollowedStreamer = async (streamerName: string) => {
   // eslint-disable-next-line camelcase
@@ -59,7 +59,7 @@ const addFollowedStreamer = async (streamerName: string) => {
   );
 
   // eslint-disable-next-line camelcase
-  await updateDirectusStreamer({ streamerName, thumbnailURL: thumbnail_url });
+  await followDirectusStreamer({ streamerName, thumbnailURL: thumbnail_url });
   searchText.value = '';
 };
 </script>
