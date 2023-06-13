@@ -7,6 +7,7 @@ export interface Streamer {
   online: boolean;
   description: string;
   profile_image_url: string;
+  users: number[];
 }
 
 export interface StreamerTwitch {
@@ -42,7 +43,7 @@ export const useStreamersStore = defineStore('streamers', () => {
     return streamers.value;
   };
 
-  const updateDirectusStreamer = async ({
+  const followDirectusStreamer = async ({
     streamerName,
     thumbnailURL,
   }: {
@@ -74,6 +75,32 @@ export const useStreamersStore = defineStore('streamers', () => {
             ],
             update: [],
             delete: [],
+          },
+        },
+      });
+      await fetchDirectusStreamers();
+    } catch (e) {
+      throw new Error((e as Error).message);
+    }
+
+    return streamers.value;
+  };
+
+  const unfollowDirectusStreamer = async ({
+    streamerRelationId,
+  }: {
+    streamerRelationId: string;
+  }): Promise<Streamer[]> => {
+    if (!user.value) return streamers.value;
+
+    try {
+      await updateUser({
+        id: user.value.id,
+        user: {
+          streamers: {
+            create: [],
+            update: [],
+            delete: [streamerRelationId],
           },
         },
       });
@@ -128,7 +155,8 @@ export const useStreamersStore = defineStore('streamers', () => {
     streamers,
     sacs,
     fetchDirectusStreamers,
-    updateDirectusStreamer,
+    followDirectusStreamer,
+    unfollowDirectusStreamer,
     getStreamers,
     updateStreamers,
   };
