@@ -6,7 +6,6 @@
 
 <script lang="ts" setup>
 import { useRoute } from 'vue-router';
-import { useStreamersStore } from '~/stores/streamersStore';
 
 const route = useRoute();
 
@@ -19,15 +18,6 @@ useHead({
 });
 
 onMounted(async () => {
-  const { refreshToken } = useDirectusToken();
-  if (refreshToken.value) {
-    const streamersStore = useStreamersStore();
-    const { sacs } = streamersStore;
-    await streamersStore.updateStreamers(sacs.map((streamer) => streamer.id));
-
-    return;
-  }
-
   const { setToken } = useDirectusAuth();
   try {
     const { data } = await (

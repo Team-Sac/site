@@ -1,8 +1,10 @@
 <template>
   <div id="twitch-streams" :class="gridSize">
     <StreamerList @change-size="changeSize"></StreamerList>
-    <MultiTwitchStreams></MultiTwitchStreams>
-    <MultiTwitchChats @change-size="changeSize"></MultiTwitchChats>
+    <LazyTwitchStreamsMultiTwitchStreams></LazyTwitchStreamsMultiTwitchStreams>
+    <LazyTwitchStreamsMultiTwitchChats
+      @change-size="changeSize"
+    ></LazyTwitchStreamsMultiTwitchChats>
   </div>
 </template>
 

@@ -1,6 +1,6 @@
 <template>
   <div id="layout" ref="layout">
-    <header-base></header-base>
+    <shared-header-base></shared-header-base>
     <slot></slot>
   </div>
 </template>

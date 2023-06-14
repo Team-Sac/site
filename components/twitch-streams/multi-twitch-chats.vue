@@ -28,12 +28,12 @@
         </button>
       </div>
       <div class="h-full">
-        <TwitchChat
+        <lazy-twitch-chat
           v-for="(stream, key) in streams"
           :key="stream"
           :hidden="key !== selected"
           :streamer="stream"
-        ></TwitchChat>
+        ></lazy-twitch-chat>
       </div>
     </div>
   </div>
