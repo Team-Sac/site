@@ -10,7 +10,7 @@
       :hidden="close"
       class="container-streamer-list"
     >
-      <SearchStreamer v-if="hasRight"></SearchStreamer>
+      <StreamerSearchStreamer v-if="hasRight"></StreamerSearchStreamer>
       <div class="streamers">
         <div
           v-for="streamer in streamers"
@@ -39,9 +39,8 @@
 </template>
 
 <script lang="ts" setup>
-import { useStreamersStore } from '@/stores/streamersStore';
+import { useStreamersStore } from '~/stores/streamersStore';
 import { useStreamsStore } from '~/stores/streamsStore';
-import SearchStreamer from '~/components/search-streamer.vue';
 import { DirectusUser } from 'nuxt-directus/dist/runtime/types';
 
 export interface StreamerSearch {

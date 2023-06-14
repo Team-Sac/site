@@ -29,7 +29,7 @@
 <script lang="ts" setup>
 import { Ref } from 'vue';
 import { useUserStore } from '~/stores/userStore';
-import { StreamerSearch } from '~/components/streamer-list.vue';
+import { StreamerSearch } from '~/components/streamer/streamer-list.vue';
 import { useStreamersStore } from '~/stores/streamersStore';
 
 const searchText = ref('');
