@@ -5,11 +5,7 @@
         <i :class="close ? 'fa-users' : 'fa-times'" class="fas"></i>
       </button>
     </div>
-    <div
-      :class="close ? 'hidden' : ''"
-      :hidden="close"
-      class="container-streamer-list"
-    >
+    <div :class="close ? '!hidden' : ''" class="container-streamer-list">
       <StreamerSearchStreamer v-if="hasRight"></StreamerSearchStreamer>
       <div class="streamers">
         <div
@@ -114,7 +110,7 @@ const removeFollowedStreamer = async (streamerRelationId: string) => {
 }
 
 #streamer-list {
-  @apply grid grid-rows-[30px,1fr] overflow-hidden;
+  @apply grid grid-rows-[30px,1fr] overflow-hidden pr-0.5;
 }
 
 .container-streamer-list {
@@ -126,11 +122,11 @@ const removeFollowedStreamer = async (streamerRelationId: string) => {
 }
 
 .element-streamer-list {
-  @apply grid grid-cols-[5rem,1fr,20px] items-center p-3 m-1 relative cursor-pointer hover:bg-gray-100 hover:shadow-lg;
+  @apply grid grid-cols-[5rem,1fr,20px] items-center p-1 relative cursor-pointer hover:opacity-75 hover:shadow-lg;
 }
 
 .icon-streamer-list {
-  @apply h-20 w-20 rounded-full object-cover mr-3;
+  @apply h-20 w-20 object-cover mr-3 rounded;
 }
 
 .name-streamer-list {
@@ -138,15 +134,10 @@ const removeFollowedStreamer = async (streamerRelationId: string) => {
 }
 
 .unfollow-streamer {
-  @apply w-full hover:bg-gray-300;
+  @apply w-full hover:bg-gray-600 hover:rounded;
 }
 
-.offline {
-  @apply bg-gray-200 grayscale;
-}
-
-.hide,
-.hidden {
-  display: none;
+.element-streamer-list:has(.unfollow-streamer:hover) {
+  @apply hover:opacity-100;
 }
 </style>

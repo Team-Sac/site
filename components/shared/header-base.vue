@@ -57,7 +57,7 @@ a {
 }
 
 .header {
-  @apply flex justify-between items-center gap-12 p-0 mx-16 my-8;
+  @apply flex justify-between items-center gap-12 p-0 px-16 py-8;
 }
 
 .links {
