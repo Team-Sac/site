@@ -69,7 +69,7 @@ const addFollowedStreamer = async (streamerName: string) => {
   @apply relative;
 }
 #channel-list {
-  @apply absolute z-10 bg-white w-full overflow-x-auto;
+  @apply absolute z-10 w-full overflow-x-auto;
 }
 .searchResult {
   @apply grid grid-cols-[50px,1fr];
