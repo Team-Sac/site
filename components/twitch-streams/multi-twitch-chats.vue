@@ -22,7 +22,7 @@
           v-for="(stream, key) in streams"
           :key="stream"
           class="tabs-chat"
-          @click="selected = key"
+          @click="() => (selected = key)"
         >
           {{ stream }}
         </button>
@@ -98,7 +98,7 @@ const maximize = () => {
 }
 
 #tabs-multi-twitch-chats {
-  @apply inline whitespace-nowrap overflow-x-auto bg-white;
+  @apply inline whitespace-nowrap overflow-x-auto;
 }
 
 .tabs-chat {
