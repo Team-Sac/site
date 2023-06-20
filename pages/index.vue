@@ -17,7 +17,7 @@ const gridSize = ref<
   | 'grid-cols-[minmax(0,1fr),3fr,60px]'
   | 'grid-cols-[minmax(0,1fr),3fr,30px]'
   | 'grid-cols-[30px,3fr,30px]'
->('grid-cols-[minmax(0,1fr),3fr,minmax(0,1fr)]');
+>('grid-cols-[minmax(0,2fr),7fr,minmax(0,3fr)]');
 
 const changeSize = ({
   element,
@@ -53,6 +53,6 @@ const changeSize = ({
 
 <style scoped>
 #twitch-streams {
-  @apply w-full h-[calc(100%-2.5rem)] grid overflow-hidden;
+  @apply w-full h-[calc(100vh-10.7rem)] grid overflow-hidden px-40 pb-16;
 }
 </style>
