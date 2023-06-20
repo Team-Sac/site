@@ -20,7 +20,9 @@
             :src="streamer.profile_image_url"
             class="icon-streamer-list"
           />
-          <p class="name-streamer-list">{{ streamer.id }}</p>
+          <p :title="streamer.id" class="name-streamer-list">
+            {{ streamer.id }}
+          </p>
           <button
             v-if="!streamer.sac"
             class="unfollow-streamer"
