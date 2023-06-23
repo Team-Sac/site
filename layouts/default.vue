@@ -9,6 +9,6 @@
 
 <style scoped>
 #layout {
-  @apply h-screen text-gray-50 bg-gradient-to-b from-[#000309] to-[#262B4A];
+  @apply text-gray-50 bg-gradient-to-b from-[#000309] to-[#262B4A];
 }
 </style>
