@@ -43,11 +43,11 @@ const sacs = await computed<Streamer[]>(() => streamersStore.sacs);
 
 <style scoped>
 .about {
-  @apply w-full 2xl:h-[calc(100vh-10.7rem)] grid grid-cols-[repeat(auto-fit,minmax(350px,1fr))] gap-[7.5%] justify-items-center px-40 pb-16;
+  @apply w-full min-h-screen 2xl:h-[calc(100vh-10.7rem)] grid grid-cols-[repeat(auto-fit,minmax(350px,1fr))] gap-[7.5%] justify-items-center justify-center  px-20 md:px-40 2xl:pt-16 pb-16;
 }
 
 .card {
-  @apply relative max-w-full px-[31px] py-[27px] aspect-square rounded-lg overflow-hidden content-center flex flex-col justify-between;
+  @apply relative max-w-full px-[12px] md:px-[31px] py-[27px] aspect-square rounded-lg overflow-hidden content-center flex flex-col justify-between;
 }
 
 .image-wrapper {
@@ -76,7 +76,7 @@ const sacs = await computed<Streamer[]>(() => streamersStore.sacs);
 }
 
 .description > p {
-  @apply relative text-[14px] px-3 py-2;
+  @apply relative text-[9px] md:text-[11px] xl:text-[14px] px-1.5 md:px-3 py-2;
 }
 
 /*.about {

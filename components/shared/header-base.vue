@@ -1,15 +1,16 @@
 <template>
   <div class="header">
-    <NuxtLink to="/">
+    <NuxtLink id="logo-home" to="/">
       <img
         id="team-sac-logo"
         alt="Logo Team Sac"
+        class="logo"
         height="810"
         src="/logo_team_sac.png"
         width="1089"
       />
     </NuxtLink>
-    <div class="links">
+    <div v-if="width >= 960" class="links">
       <NuxtLink id="link-home" class="link" to="/">Home</NuxtLink>
       <NuxtLink id="link-announce" class="link" to="announce"
         >Annonces</NuxtLink
@@ -39,25 +40,36 @@
         Logout
       </button>
     </div>
+    <div v-else>
+      <button id="menu-burger">
+        <i class="fas fa-bars fa-lg"></i>
+      </button>
+    </div>
   </div>
 </template>
 
 <script lang="ts" setup>
+import { useWindowSize } from '@vueuse/core';
+
 const { refreshToken } = useDirectusToken();
 const { logout } = useDirectusAuth();
+
+const { width } = useWindowSize();
 </script>
 
 <style scoped>
 #team-sac-logo {
-  @apply w-36;
+  @apply h-full w-full;
 }
-
+#logo-home {
+  @apply h-full;
+}
 a {
   @apply cursor-pointer;
 }
 
 .header {
-  @apply flex justify-between items-center gap-12 p-0 px-16 py-8;
+  @apply flex h-36 justify-between items-center gap-12 p-0 px-16 py-8;
 }
 
 .links {
@@ -86,5 +98,9 @@ a {
 
 #discord-button {
   @apply flex gap-[5px] items-center;
+}
+
+#menu-burger > i {
+  @apply text-secondary-100 h-full;
 }
 </style>
