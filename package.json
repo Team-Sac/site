@@ -13,7 +13,7 @@
   },
   "devDependencies": {
     "@nuxtjs/eslint-config-typescript": "^12.0.0",
-    "@nuxtjs/tailwindcss": "^6.6.4",
+    "@nuxtjs/tailwindcss": "^6.8.0",
     "@types/uuid": "^9.0.1",
     "@typescript-eslint/eslint-plugin": "^5.56.0",
     "@typescript-eslint/parser": "^5.56.0",
