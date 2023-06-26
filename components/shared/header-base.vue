@@ -1,5 +1,6 @@
 <template>
   <div class="header">
+    <div v-if="linksOpen" class="menu-background"></div>
     <NuxtLink id="logo-home" to="/">
       <img
         id="team-sac-logo"
@@ -10,12 +11,26 @@
         width="1089"
       />
     </NuxtLink>
-    <div v-if="width >= 960" class="links">
-      <NuxtLink id="link-home" class="link" to="/">Home</NuxtLink>
-      <NuxtLink id="link-announce" class="link" to="announce"
+    <div v-if="width >= 1024 || linksOpen" class="links">
+      <NuxtLink
+        id="link-home"
+        :class="isActualRoute('index')"
+        class="link"
+        to="/"
+        >Home</NuxtLink
+      >
+      <NuxtLink
+        id="link-announce"
+        :class="isActualRoute('announce')"
+        class="link"
+        to="announce"
         >Annonces</NuxtLink
       >
-      <NuxtLink id="link-about" class="link" to="about"
+      <NuxtLink
+        id="link-about"
+        :class="isActualRoute('about')"
+        class="link"
+        to="about"
         >Qui sommes-nous ?</NuxtLink
       >
       <NuxtLink
@@ -29,6 +44,7 @@
       </NuxtLink>
       <NuxtLink
         v-if="!refreshToken"
+        id="login-button"
         class="button"
         to="https://directus.teamsac.xyz/auth/login/twitch?redirect=http://localhost:3000"
       >
@@ -40,9 +56,10 @@
         Logout
       </button>
     </div>
-    <div v-else>
-      <button id="menu-burger">
-        <i class="fas fa-bars fa-lg"></i>
+    <div v-if="width < 1024" class="relative">
+      <button id="menu-burger" @click="openLinks">
+        <i v-if="linksOpen" class="fas fa-times fa-lg"></i>
+        <i v-else class="fas fa-bars fa-lg"></i>
       </button>
     </div>
   </div>
@@ -55,6 +72,27 @@ const { refreshToken } = useDirectusToken();
 const { logout } = useDirectusAuth();
 
 const { width } = useWindowSize();
+
+const linksOpen = ref<boolean>(false);
+
+const openLinks = () => {
+  linksOpen.value = !linksOpen.value;
+};
+
+const route = useRoute();
+
+watch(
+  route,
+  () => {
+    linksOpen.value = false;
+  },
+  { deep: true, immediate: true },
+);
+
+const isActualRoute = (pathName: string): string => {
+  if (route.name === pathName) return '!text-secondary-100';
+  return '';
+};
 </script>
 
 <style scoped>
@@ -62,30 +100,27 @@ const { width } = useWindowSize();
   @apply h-full w-full;
 }
 #logo-home {
-  @apply h-full;
+  @apply z-10 relative h-[5rem] lg:h-full;
 }
+
 a {
   @apply cursor-pointer;
 }
 
 .header {
-  @apply flex h-36 justify-between items-center gap-12 p-0 px-16 py-8;
+  @apply relative flex h-36 justify-between lg:items-center gap-12 p-0 px-16 py-8;
+}
+
+.menu-background {
+  @apply z-10 absolute h-screen w-screen top-0 left-0 bg-gray-900 opacity-60;
 }
 
 .links {
-  @apply flex justify-center items-center gap-[25px];
+  @apply z-10 absolute lg:relative w-full lg:w-auto flex flex-col lg:flex-row justify-center items-center gap-[25px] top-[50vh] left-[50vw] translate-x-[-50%] translate-y-[-50%] lg:top-auto lg:left-auto lg:translate-x-0 lg:translate-y-0 py-16;
 }
 
 .link {
-  @apply font-heading text-[25px] tracking-[0.45px] leading-[16px];
-}
-
-#link-home {
-  @apply text-secondary-100;
-}
-
-#link-announce {
-  @apply text-gray-50;
+  @apply font-heading text-[25px] tracking-[0.45px] leading-[16px] text-white hover:!text-secondary-50;
 }
 
 #link-about {
@@ -93,11 +128,19 @@ a {
 }
 
 .button {
-  @apply bg-gray-800 rounded-3xl h-full text-center px-5 py-1.5 tracking-[0.45px] text-white;
+  @apply px-5 bg-gray-800 rounded-3xl lg:h-full text-center lg:px-5 py-1.5 tracking-[0.45px] text-white hover:bg-opacity-60;
 }
 
 #discord-button {
   @apply flex gap-[5px] items-center;
+}
+
+#login-button {
+  @apply flex gap-[5px] items-center;
+}
+
+#menu-burger {
+  @apply z-10 relative;
 }
 
 #menu-burger > i {
