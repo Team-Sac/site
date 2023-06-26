@@ -9,14 +9,14 @@
 </template>
 
 <script lang="ts" setup>
-const listSize = ref<'minmax(0,1fr)' | '30px'>('minmax(0,1fr)');
-const chatSize = ref<'minmax(0,1fr)' | '60px' | '30px'>('minmax(0,1fr)');
+const listSize = ref<'minmax(0,2fr)' | '30px'>('minmax(0,2fr)');
+const chatSize = ref<'minmax(0,3fr)' | '60px' | '30px'>('minmax(0,3fr)');
 const gridSize = ref<
-  | 'grid-cols-[minmax(0,1fr),3fr,minmax(0,1fr)]'
-  | 'grid-cols-[30px,3fr,minmax(0,1fr)]'
-  | 'grid-cols-[minmax(0,1fr),3fr,60px]'
-  | 'grid-cols-[minmax(0,1fr),3fr,30px]'
-  | 'grid-cols-[30px,3fr,30px]'
+  | 'grid-cols-[minmax(0,2fr),7fr,minmax(0,3fr)]'
+  | 'grid-cols-[30px,7fr,minmax(0,3fr)]'
+  | 'grid-cols-[minmax(0,2fr),7fr,60px]'
+  | 'grid-cols-[minmax(0,2fr),7fr,30px]'
+  | 'grid-cols-[30px,7fr,30px]'
 >('grid-cols-[minmax(0,2fr),7fr,minmax(0,3fr)]');
 
 const changeSize = ({
@@ -41,18 +41,18 @@ const changeSize = ({
       break;
     default:
       if (element === 'list') {
-        listSize.value = 'minmax(0,1fr)';
+        listSize.value = 'minmax(0,2fr)';
       } else {
-        chatSize.value = 'minmax(0,1fr)';
+        chatSize.value = 'minmax(0,3fr)';
       }
       break;
   }
-  gridSize.value = `grid-cols-[${listSize.value},3fr,${chatSize.value}]`;
+  gridSize.value = `grid-cols-[${listSize.value},7fr,${chatSize.value}]`;
 };
 </script>
 
 <style scoped>
 #twitch-streams {
-  @apply w-full h-[calc(100vh-10.7rem)] grid overflow-hidden px-40 pb-16;
+  @apply w-full h-[calc(100vh-9rem)] grid overflow-hidden px-40 pb-16;
 }
 </style>
