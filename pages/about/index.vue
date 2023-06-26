@@ -43,11 +43,11 @@ const sacs = await computed<Streamer[]>(() => streamersStore.sacs);
 
 <style scoped>
 .about {
-  @apply w-full min-h-screen 2xl:h-[calc(100vh-10.7rem)] grid grid-cols-[repeat(auto-fit,minmax(350px,1fr))] gap-[7.5%] justify-items-center justify-center  px-20 md:px-40 2xl:pt-16 pb-16;
+  @apply w-full min-h-screen 2xl:h-[calc(100vh-10.7rem)] grid grid-cols-[repeat(auto-fit,minmax(350px,1fr))] gap-[2.5%] xl:gap-[7.5%] justify-items-center justify-center  px-20 md:px-40 2xl:pt-16 pb-16;
 }
 
 .card {
-  @apply relative max-w-full px-[12px] md:px-[31px] py-[27px] aspect-square rounded-lg overflow-hidden content-center flex flex-col justify-between;
+  @apply relative max-w-[80%] md:max-w-full px-[12px] md:px-[31px] py-[10px] md:py-[27px] aspect-square rounded-lg overflow-hidden content-center flex flex-col justify-between;
 }
 
 .image-wrapper {
@@ -76,50 +76,6 @@ const sacs = await computed<Streamer[]>(() => streamersStore.sacs);
 }
 
 .description > p {
-  @apply relative text-[9px] md:text-[11px] xl:text-[14px] px-1.5 md:px-3 py-2;
+  @apply relative text-[11px] md:text-[14px] px-1.5 md:px-3 py-2;
 }
-
-/*.about {
-  @apply h-[calc(100%-10.7rem)] w-full grid grid-cols-3 grid-rows-2 gap-[7.5%] justify-items-center px-40 pb-16;
-}
-
-.card {
-  @apply relative h-full max-w-full px-[31px] py-[27px] aspect-square rounded-lg overflow-hidden content-center flex flex-col justify-between;
-}
-
-.card > img {
-  @apply relative pointer-events-none top-0 left-0 aspect-square max-h-full;
-}
-
-.image-wrapper {
-  @apply !absolute w-full aspect-square max-h-full top-0 left-0 object-cover;
-}
-
-.image-filter {
-  @apply relative w-full top-0 left-0;
-}
-
-.card > div {
-  @apply relative;
-}
-
-.title {
-  @apply flex gap-[72px] justify-between;
-}
-
-.name {
-  @apply font-heading text-[26px];
-}
-
-.more {
-  @apply bg-white py-[10px] rounded-lg text-gray-900 text-center gap-[10px];
-}
-
-.more > .twitch {
-  @apply p-[10px];
-}
-
-.description {
-  @apply flex flex-col gap-[10px] rounded-xl bg-gradient-to-bl from-[hsla(231,73%,9%,0.6)] to-[hsla(230,84%,10%,0.1)] backdrop-blur-[60px];
-}*/
 </style>
