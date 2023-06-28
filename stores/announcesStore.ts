@@ -4,11 +4,12 @@ export interface Announce {
   id: number;
   title: string;
   content: string;
+  url: string;
   date_created: string;
 }
 
 export const useAnnouncesStore = defineStore('announces', () => {
-  const { getItems, createItems, deleteItems } = useDirectusItems();
+  const { getItems, createItems, updateItem, deleteItems } = useDirectusItems();
 
   const announces = ref<Announce[]>([]);
 
@@ -19,6 +20,9 @@ export const useAnnouncesStore = defineStore('announces', () => {
       });
     } catch (e) {}
   };
+
+  const getAnnounce = (id: number): Announce =>
+    announces.value.find((announce) => announce.id === id);
 
   const createAnnounce = async ({
     title,
@@ -45,6 +49,32 @@ export const useAnnouncesStore = defineStore('announces', () => {
     await fetchAnnounces();
   };
 
+  const updateAnnounce = async ({
+    id,
+    title,
+    content,
+    url,
+  }: {
+    id: number;
+    title: string;
+    content?: string;
+    url?: string;
+  }) => {
+    try {
+      await updateItem<Announce>({
+        id,
+        collection: 'announces',
+        item: {
+          title,
+          content,
+          url,
+        },
+      });
+    } catch (e) {}
+
+    await fetchAnnounces();
+  };
+
   const deleteAnnounce = async (id: number) => {
     try {
       await deleteItems({
@@ -59,7 +89,9 @@ export const useAnnouncesStore = defineStore('announces', () => {
   return {
     announces,
     fetchAnnounces,
+    getAnnounce,
     createAnnounce,
+    updateAnnounce,
     deleteAnnounce,
   };
 });
