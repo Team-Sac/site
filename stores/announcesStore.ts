@@ -17,6 +17,9 @@ export const useAnnouncesStore = defineStore('announces', () => {
     try {
       announces.value = await getItems<Announce[]>({
         collection: 'announces',
+        params: {
+          sort: '-date_created',
+        },
       });
     } catch (e) {}
   };
