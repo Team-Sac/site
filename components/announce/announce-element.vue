@@ -22,11 +22,11 @@
         timeStyle: 'short',
       })
     }}</time>
-    <div v-if="hasRight" class="announce-actions">
+    <div v-if="hasRight && width >= 1024" class="announce-actions">
       <button title="Éditer" @click="editAnnounce">
         <i class="fas fa-pen fa-lg"></i>
       </button>
-      <button title="Supprimer" @click="() => removeAnnounce">
+      <button title="Supprimer" @click="removeAnnounce">
         <i class="fas fa-trash fa-lg"></i>
       </button>
     </div>
@@ -36,6 +36,7 @@
 <script lang="ts" setup>
 import { useAnnouncesStore } from '~/stores/announcesStore';
 import { DirectusUser } from 'nuxt-directus/dist/runtime/types';
+import { useWindowSize } from '@vueuse/core';
 
 const props = defineProps({
   announceId: {
@@ -58,6 +59,8 @@ const hasRight = computed(() =>
     'bdb50fa6-c41d-4b5f-8d23-91d4f3748533',
   ].includes(user.value?.role),
 );
+
+const { width } = useWindowSize();
 
 const editAnnounce = () => {
   emit('openAnnounceEditor', announce.value.id);
@@ -82,7 +85,7 @@ const removeAnnounce = async () => {
 }
 
 .content > div {
-  @apply grid grid-cols-[1fr,40px];
+  @apply grid grid-cols-[1fr,40px] pb-10 lg:pb-0;
 }
 
 .more {
@@ -94,7 +97,7 @@ i {
 }
 
 .announce > time {
-  @apply absolute top-0 right-0 p-5;
+  @apply absolute bottom-0 left-0 lg:bottom-auto lg:left-auto lg:top-0 lg:right-0 p-5;
 }
 
 .announce-actions {

@@ -20,12 +20,15 @@
 
 <script lang="ts" setup>
 import { Announce, useAnnouncesStore } from '~/stores/announcesStore';
+import { useWindowSize } from '@vueuse/core';
 
 const announces = computed<Announce[]>(() => useAnnouncesStore().announces);
 
 const { fetchAnnounces } = useAnnouncesStore();
 
 await fetchAnnounces();
+
+const { width } = useWindowSize();
 
 const announceId = ref<string>();
 const dialogEvent = ref<boolean>(false);
@@ -38,7 +41,7 @@ const editAnnounce = (idAnnounce: number) => {
 
 <style scoped>
 #about-page {
-  @apply min-h-[calc(100vh-9rem)] w-full px-20 pb-16 flex flex-col gap-5;
+  @apply min-h-[calc(100vh-9rem)] w-full lg:px-20 pb-16 flex flex-col gap-5;
 }
 
 #announce-list {

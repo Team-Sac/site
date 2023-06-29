@@ -1,6 +1,8 @@
 <template>
   <div class="announce-edit">
-    <button v-if="hasRight" @click="showDialog">Ajouter une annonce</button>
+    <button v-if="hasRight && width >= 1024" @click="showDialog">
+      Ajouter une annonce
+    </button>
     <dialog ref="dialog" class="dialog-announce">
       <form>
         <div class="quitDialog">
@@ -42,6 +44,7 @@
 <script lang="ts" setup>
 import { useAnnouncesStore } from '~/stores/announcesStore';
 import { DirectusUser } from 'nuxt-directus/dist/runtime/types';
+import { useWindowSize } from '@vueuse/core';
 
 const props = defineProps({
   announceId: {
@@ -60,6 +63,8 @@ const hasRight = computed(() =>
     'bdb50fa6-c41d-4b5f-8d23-91d4f3748533',
   ].includes(user.value?.role),
 );
+
+const { width } = useWindowSize();
 
 const { getAnnounce, createAnnounce, updateAnnounce } = useAnnouncesStore();
 
