@@ -31,5 +31,10 @@ export default defineNuxtConfig({
     twitchClientId: 'twitch_client_id',
     twitchClientSecret: 'twitch_client_secret',
     twitchTransportSecret: 'twitch_transport_secret',
+    public: {
+      protocol: 'http://',
+      siteURL: 'localhost',
+      port: ':3000',
+    },
   },
 });

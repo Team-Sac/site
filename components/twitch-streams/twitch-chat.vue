@@ -1,7 +1,7 @@
 <template>
   <iframe
     :id="`streamer-chat-${streamer}`"
-    :src="`https://www.twitch.tv/embed/${streamer}/chat?parent=${runtimeConfig.public.url}&darkpopout`"
+    :src="`https://www.twitch.tv/embed/${streamer}/chat?parent=${runtimeConfig.public.siteURL}&darkpopout`"
     height="100%"
     sandbox="
       allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups

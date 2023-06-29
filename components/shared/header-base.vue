@@ -45,7 +45,11 @@
       <NuxtLink
         v-if="!refreshToken"
         id="login-button"
-        :to="`https://directus.teamsac.xyz/auth/login/twitch?redirect=${runtimeConfig.public.url}`"
+        :to="`https://directus.teamsac.xyz/auth/login/twitch?redirect=${
+          runtimeConfig.public.protocol +
+          runtimeConfig.public.siteURL +
+          runtimeConfig.public.port
+        }`"
         class="button"
       >
         <i class="fab fa-twitch"></i>
