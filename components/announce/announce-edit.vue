@@ -126,6 +126,11 @@ const editAnnounce = async () => {
 
 <style scoped>
 .announce-edit {
+  @apply flex justify-center;
+}
+
+button {
+  @apply px-5 bg-gray-800 rounded-3xl lg:h-full text-center lg:px-5 py-1.5 tracking-[0.45px] text-white hover:bg-opacity-60;
 }
 
 .dialog-announce {

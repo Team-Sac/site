@@ -3,15 +3,18 @@
     <announce-edit
       :announce-id="announceId"
       :dialog-event="dialogEvent"
+      class="announce-edit"
     ></announce-edit>
-    <ClientOnly fallback="Chargement des annonces..." fallback-tag="span">
-      <announce-element
-        v-for="announce in announces"
-        :key="announce.id"
-        :announce-id="announce.id"
-        @open-announce-editor="editAnnounce"
-      ></announce-element>
-    </ClientOnly>
+    <div id="announce-list">
+      <ClientOnly fallback="Chargement des annonces..." fallback-tag="span">
+        <announce-element
+          v-for="announce in announces"
+          :key="announce.id"
+          :announce-id="announce.id"
+          @open-announce-editor="editAnnounce"
+        ></announce-element>
+      </ClientOnly>
+    </div>
   </div>
 </template>
 
@@ -35,6 +38,10 @@ const editAnnounce = (idAnnounce: number) => {
 
 <style scoped>
 #about-page {
-  @apply min-h-[calc(100vh-9rem)];
+  @apply min-h-[calc(100vh-9rem)] w-full px-20 pb-16 flex flex-col gap-5;
+}
+
+#announce-list {
+  @apply flex flex-col gap-5;
 }
 </style>
