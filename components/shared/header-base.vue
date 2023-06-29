@@ -45,8 +45,8 @@
       <NuxtLink
         v-if="!refreshToken"
         id="login-button"
+        :to="`https://directus.teamsac.xyz/auth/login/twitch?redirect=${runtimeConfig.public.url}`"
         class="button"
-        to="https://directus.teamsac.xyz/auth/login/twitch?redirect=http://localhost:3000"
       >
         <i class="fab fa-twitch"></i>
         Login
@@ -67,6 +67,8 @@
 
 <script lang="ts" setup>
 import { useWindowSize } from '@vueuse/core';
+
+const runtimeConfig = useRuntimeConfig();
 
 const { refreshToken } = useDirectusToken();
 const { logout } = useDirectusAuth();
