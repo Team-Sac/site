@@ -41,6 +41,7 @@
 
 <script lang="ts" setup>
 import { useStreamsStore } from '~/stores/streamsStore';
+import TwitchChat from '#components';
 
 const emit = defineEmits(['changeSize']);
 

@@ -44,7 +44,7 @@
       </NuxtLink>
       <div v-if="width >= 1024">
         <NuxtLink
-          v-if="!refreshToken"
+          v-if="!token"
           id="login-button"
           :to="`https://directus.teamsac.xyz/auth/login/twitch?redirect=${
             runtimeConfig.public.protocol +
@@ -76,7 +76,7 @@ import { useWindowSize } from '@vueuse/core';
 
 const runtimeConfig = useRuntimeConfig();
 
-const { refreshToken } = useDirectusToken();
+const { token } = useDirectusToken();
 const { logout } = useDirectusAuth();
 
 const { width } = useWindowSize();

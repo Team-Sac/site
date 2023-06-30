@@ -10,6 +10,7 @@
 
 <script lang="ts" setup>
 import { useStreamsStore } from '~/stores/streamsStore';
+import { TwitchStream } from '#components';
 
 const { streams } = useStreamsStore();
 </script>
