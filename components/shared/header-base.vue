@@ -42,23 +42,25 @@
         <i class="fab fa-discord"></i>
         <p>Rejoindre le Discord</p>
       </NuxtLink>
-      <NuxtLink
-        v-if="!refreshToken"
-        id="login-button"
-        :to="`https://directus.teamsac.xyz/auth/login/twitch?redirect=${
-          runtimeConfig.public.protocol +
-          runtimeConfig.public.siteURL +
-          runtimeConfig.public.port
-        }`"
-        class="button"
-      >
-        <i class="fab fa-twitch"></i>
-        Login
-      </NuxtLink>
-      <button v-else class="button" @click="logout">
-        <i class="fab fa-twitch"></i>
-        Logout
-      </button>
+      <div v-if="width >= 1024">
+        <NuxtLink
+          v-if="!refreshToken"
+          id="login-button"
+          :to="`https://directus.teamsac.xyz/auth/login/twitch?redirect=${
+            runtimeConfig.public.protocol +
+            runtimeConfig.public.siteURL +
+            runtimeConfig.public.port
+          }`"
+          class="button"
+        >
+          <i class="fab fa-twitch"></i>
+          Login
+        </NuxtLink>
+        <button v-else class="button" @click="logout">
+          <i class="fab fa-twitch"></i>
+          Logout
+        </button>
+      </div>
     </div>
     <div v-if="width < 1024" class="relative">
       <button id="menu-burger" @click="openLinks">

@@ -1,10 +1,10 @@
 <template>
   <div id="multi-twitch-streams" :class="`grid${streams.length}`">
-    <LazyTwitchStream
+    <twitch-stream
       v-for="stream in streams"
       :key="stream"
       :streamer="stream"
-    ></LazyTwitchStream>
+    ></twitch-stream>
   </div>
 </template>
 
