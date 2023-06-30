@@ -10,7 +10,7 @@
 
 <script lang="ts" setup>
 import { useStreamsStore } from '~/stores/streamsStore';
-import { TwitchStream } from '#components';
+import TwitchStream from '~/components/twitch-streams/twitch-stream.vue';
 
 const { streams } = useStreamsStore();
 </script>
