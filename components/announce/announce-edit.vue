@@ -45,6 +45,7 @@
 import { useAnnouncesStore } from '~/stores/announcesStore';
 import { DirectusUser } from 'nuxt-directus/dist/runtime/types';
 import { useWindowSize } from '@vueuse/core';
+import { useDirectusUser } from 'nuxt-directus/dist/runtime/composables/useDirectusUser';
 
 const props = defineProps({
   announceId: {
