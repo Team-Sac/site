@@ -77,7 +77,6 @@ import { useWindowSize } from '@vueuse/core';
 const runtimeConfig = useRuntimeConfig();
 
 const { token } = useDirectusToken();
-const { logout } = useDirectusAuth();
 
 const { width } = useWindowSize();
 
@@ -100,6 +99,10 @@ watch(
 const isActualRoute = (pathName: string): string => {
   if (route.name === pathName) return '!text-secondary-100';
   return '';
+};
+
+const logout = () => {
+  token.value = null;
 };
 </script>
 
