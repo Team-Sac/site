@@ -35,8 +35,8 @@
 
 <script lang="ts" setup>
 import { useAnnouncesStore } from '~/stores/announcesStore';
-import { DirectusUser } from 'nuxt-directus/dist/runtime/types';
 import { useWindowSize } from '@vueuse/core';
+import { useDirectusUser } from '#imports';
 
 const props = defineProps({
   announceId: {
@@ -51,13 +51,11 @@ const announce = computed(() => getAnnounce(props.announceId));
 
 const emit = defineEmits(['openAnnounceEditor']);
 
-const user = computed<DirectusUser>(() => useDirectusUser().value);
-
 const hasRight = computed(() =>
   [
     'e5c8b057-49ff-4781-af76-ab555f5a0465',
     'bdb50fa6-c41d-4b5f-8d23-91d4f3748533',
-  ].includes(user.value?.role),
+  ].includes(useDirectusUser().value?.role),
 );
 
 const { width } = useWindowSize();
