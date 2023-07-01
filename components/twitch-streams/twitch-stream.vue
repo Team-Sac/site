@@ -20,7 +20,6 @@ const { load } = useScriptTag(
   },
 );
 
-let isStreamExist = false;
 const checkExist = setInterval(async () => {
   if (document.getElementById(`streamer-player-${props.streamer}`)) {
     await load();
@@ -32,19 +31,16 @@ const checkExist = setInterval(async () => {
       allowfullscreen: true,
     };
 
-    if (!isStreamExist) {
-      /* global Twitch */
-      const player = new Twitch.Player(
-        `streamer-player-${props.streamer}`,
-        options,
-      );
-      player.setVolume(0.5);
-    }
+    /* global Twitch */
+    const player = new Twitch.Player(
+      `streamer-player-${props.streamer}`,
+      options,
+    );
+    player.setVolume(0.5);
 
-    isStreamExist = true;
     clearInterval(checkExist);
   }
-}, 100); // check every 100ms
+}, 500); // check every 100ms
 </script>
 
 <style scoped></style>
