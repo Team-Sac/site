@@ -18,6 +18,8 @@ const { load } = useScriptTag(
   },
 );
 
+let isStreamLoaded = false;
+
 onBeforeMount(async () => {
   await load();
 
@@ -34,9 +36,10 @@ onBeforeMount(async () => {
     options,
   );
   player.setVolume(0.5);
+  isStreamLoaded = true;
 });
 
-onBeforeUpdate(async () => {
+if (!isStreamLoaded) {
   await load();
 
   const options = {
@@ -52,7 +55,7 @@ onBeforeUpdate(async () => {
     options,
   );
   player.setVolume(0.5);
-});
+}
 </script>
 
 <style scoped></style>
