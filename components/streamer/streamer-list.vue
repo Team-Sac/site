@@ -10,7 +10,7 @@
       <div class="streamers">
         <div
           v-for="streamer in streamers"
-          :key="streamer"
+          :key="streamer.id"
           :class="streamer.online ? 'online' : 'offline'"
           class="element-streamer-list"
           @click.self="streamsStore.toggle(streamer.id)"
@@ -19,8 +19,13 @@
             :alt="`image de profil ${streamer.id}`"
             :src="streamer.profile_image_url"
             class="icon-streamer-list"
+            @click.self="streamsStore.toggle(streamer.id)"
           />
-          <p :title="streamer.id" class="name-streamer-list">
+          <p
+            :title="streamer.id"
+            class="name-streamer-list"
+            @click.self="streamsStore.toggle(streamer.id)"
+          >
             {{ streamer.id }}
           </p>
           <button
