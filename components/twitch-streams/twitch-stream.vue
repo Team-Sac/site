@@ -20,8 +20,12 @@ const { load } = useScriptTag(
   },
 );
 
+let isStreamExist = false;
 const checkExist = setInterval(async () => {
-  if (document.getElementById(`streamer-player-${props.streamer}`)) {
+  if (
+    document.getElementById(`streamer-player-${props.streamer}`) &&
+    !isStreamExist
+  ) {
     await load();
 
     const options = {
@@ -38,6 +42,7 @@ const checkExist = setInterval(async () => {
     );
     player.setVolume(0.5);
 
+    isStreamExist = true;
     clearInterval(checkExist);
   }
 }, 100); // check every 100ms
