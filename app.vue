@@ -18,7 +18,7 @@ useHead({
 });
 
 onMounted(async () => {
-  const { setToken } = useDirectusAuth();
+  const { setToken, fetchUser } = useDirectusAuth();
   try {
     const { data } = await (
       await fetch(`${useDirectusUrl()}auth/refresh/`, {
@@ -29,6 +29,7 @@ onMounted(async () => {
 
     if (data === undefined) return;
     setToken(data.access_token, data.refresh_token, data.expires);
+    await fetchUser();
   } catch (e) {}
 });
 </script>

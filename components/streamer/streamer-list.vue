@@ -82,11 +82,13 @@ const opening = () => {
   });
 };
 
+const user = useDirectusUser();
+
 const hasRight = computed(() =>
   [
     'e5c8b057-49ff-4781-af76-ab555f5a0465',
     'bdb50fa6-c41d-4b5f-8d23-91d4f3748533',
-  ].includes(useDirectusUser().value?.role),
+  ].includes(user.value?.role),
 );
 
 const removeFollowedStreamer = async (streamerRelationId: string) => {

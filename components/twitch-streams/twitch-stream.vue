@@ -40,7 +40,7 @@ const checkExist = setInterval(async () => {
 
     clearInterval(checkExist);
   }
-}, 500); // check every 100ms
+}, 2000); // check every 100ms
 </script>
 
 <style scoped></style>

@@ -1,6 +1,6 @@
 <template>
   <div class="announce-edit">
-    <button v-if="hasRight && width >= 1024" @click="showDialog">
+    <button v-if="hasRight && width >= 1024 && token" @click="showDialog">
       Ajouter une annonce
     </button>
     <dialog ref="dialog" class="dialog-announce">
@@ -44,6 +44,8 @@
 <script lang="ts" setup>
 import { useAnnouncesStore } from '~/stores/announcesStore';
 import { useWindowSize } from '@vueuse/core';
+
+const { token } = useDirectusToken();
 
 const props = defineProps({
   announceId: {
