@@ -28,12 +28,12 @@
         </button>
       </div>
       <div class="h-full">
-        <twitch-chat
+        <LazyTwitchChat
           v-for="(stream, key) in streams"
           :key="stream"
           :hidden="key !== selected"
           :streamer="stream"
-        ></twitch-chat>
+        ></LazyTwitchChat>
       </div>
     </div>
   </div>
@@ -41,7 +41,7 @@
 
 <script lang="ts" setup>
 import { useStreamsStore } from '~/stores/streamsStore';
-import TwitchChat from '~/components/twitch-streams/twitch-chat.vue';
+import LazyTwitchChat from '~/components/twitch-streams/twitch-chat.vue';
 
 const emit = defineEmits(['changeSize']);
 

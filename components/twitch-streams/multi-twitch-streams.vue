@@ -1,16 +1,16 @@
 <template>
   <div id="multi-twitch-streams" :class="`grid${streams.length}`">
-    <twitch-stream
+    <LazyTwitchStream
       v-for="stream in streams"
       :key="stream"
       :streamer="stream"
-    ></twitch-stream>
+    ></LazyTwitchStream>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { useStreamsStore } from '~/stores/streamsStore';
-import TwitchStream from '~/components/twitch-streams/twitch-stream.vue';
+import LazyTwitchStream from '~/components/twitch-streams/twitch-stream.vue';
 
 const { streams } = useStreamsStore();
 </script>
