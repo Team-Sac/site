@@ -74,7 +74,7 @@ const addFollowedStreamer = async (streamerName: string) => {
 }
 
 #channel-list {
-  @apply absolute z-10 w-full overflow-x-auto;
+  @apply absolute z-10 w-full overflow-x-auto bg-gray-900 rounded-b-xl;
 }
 .searchResult {
   @apply grid grid-cols-[50px,1fr];
