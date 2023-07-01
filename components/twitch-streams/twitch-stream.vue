@@ -35,6 +35,24 @@ onBeforeMount(async () => {
   );
   player.setVolume(0.5);
 });
+
+onBeforeUpdate(async () => {
+  await load();
+
+  const options = {
+    height: '100%',
+    width: '100%',
+    channel: props.streamer,
+    allowfullscreen: true,
+  };
+
+  /* global Twitch */
+  const player = new Twitch.Player(
+    `streamer-player-${props.streamer}`,
+    options,
+  );
+  player.setVolume(0.5);
+});
 </script>
 
 <style scoped></style>
