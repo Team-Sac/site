@@ -34,7 +34,7 @@ import { StreamerSearch } from '~/components/streamer/streamer-list.vue';
 import { useStreamersStore } from '~/stores/streamersStore';
 
 const searchText = ref('');
-const searchResult: Ref<StreamerSearch[]> = ref<StreamerSearch>();
+const searchResult: Ref<StreamerSearch[]> = ref<StreamerSearch[]>([]);
 
 const { getToken } = useUserStore();
 const token = await getToken();
